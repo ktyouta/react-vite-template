@@ -1,0 +1,36 @@
+★Cloudflareメモ
+
+
+フロント側をホスティング
+
+
+■ドメイン
+videomng-front-react.pages.dev
+
+
+
+■デプロイ
+①ホーム画面にアクセスしてアプリ名クリック
+②developmentタブクリック
+③All deploymentsのコミット履歴の右端の三点アイコンからRetry deploymentを選択
+
+
+
+■再ビルド
+①ホーム画面にアクセスしてアプリ名クリック
+②developmentタブクリック
+③最新のコミット履歴のview detailをクリック
+④manage deploymentのretry deploymentを選択
+
+
+
+■環境変数変更
+①ホーム画面にアクセスしてアプリ名クリック
+②Settingsタブクリック
+③Variables and Secretsから環境変数を設定
+
+
+■アクセス設定
+①ホーム画面にアクセスして画面左メニューの「Zero Trust」をクリック
+②画面左メニューの「Access」の「Policies」をクリック
+③「Allow Specific Users」の三点アイコンから「Configure」を選択

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src",
+    "vitest.config.ts"
+  ]
+}
