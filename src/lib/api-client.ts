@@ -13,7 +13,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   config.headers.Accept = 'application/json';
 
   if (accessTokenRef) {
-    config.headers['Authorization'] = accessTokenRef;
+    config.headers['Authorization'] = `Bearer ${accessTokenRef}`;
   }
 
   config.withCredentials = true;
