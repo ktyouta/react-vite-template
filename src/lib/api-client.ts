@@ -93,6 +93,9 @@ api.interceptors.response.use(
             resetLogin();
 
             reject(err);
+            queue.forEach(cb => {
+              cb.reject(err);
+            });
           } finally {
             isRefreshing = false;
           }

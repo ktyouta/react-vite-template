@@ -1,6 +1,6 @@
 import { api } from '@/lib/api-client';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 type methodType = "GET" | "POST";
 
@@ -18,6 +18,17 @@ const useQueryWrapper = <
     RData = TData,
     PData extends {} = {},
 >(props: propsType<TData, RData, PData>) => {
+
+    const afSuccessFnRef = useRef(props.afSuccessFn);
+    const afErrorFnRef = useRef(props.afErrorFn);
+    const callbackRef = useRef(props.callback);
+
+    afSuccessFnRef.current = props.afSuccessFn;
+    afErrorFnRef.current = props.afErrorFn;
+    callbackRef.current = props.callback;
+
+    // 成功時のコールバック実行済みフラグ
+    const hasCalledSuccessRef = useRef(false);
 
     //GET
     const getQuery = async () => {
@@ -43,15 +54,23 @@ const useQueryWrapper = <
         enabled: !!props.url,
     });
 
+    // 成功時のコールバック処理
     useEffect(() => {
-        if (query.isSuccess && props.afSuccessFn) {
-            props.afSuccessFn(query.data as RData);
+        if (query.isSuccess && query.data !== undefined && !hasCalledSuccessRef.current) {
+            hasCalledSuccessRef.current = true;
+            const transformedData = callbackRef.current ? callbackRef.current(query.data) : query.data as unknown as RData;
+            afSuccessFnRef.current?.(transformedData);
+        }
+
+        if (!query.isSuccess) {
+            hasCalledSuccessRef.current = false;
         }
     }, [query.isSuccess, query.data]);
 
+    // エラー時のコールバック処理
     useEffect(() => {
-        if (query.isError && props.afErrorFn) {
-            props.afErrorFn(query.error);
+        if (query.isError && query.error) {
+            afErrorFnRef.current?.(query.error);
         }
     }, [query.isError, query.error]);
 

@@ -1,4 +1,4 @@
-import { BodyContainer } from "../body/body-ccontainer";
+import { BodyContainer } from "../body/body-container";
 import { FooterContainer } from "../footer/footer-container";
 import { HeaderContainer } from "../header/header-container";
 import { Sample } from "./sample";

@@ -1,10 +1,12 @@
 import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BodyContainer } from '../body/body-ccontainer'
+import { FooterContainer } from '../footer/footer-container'
+import { HeaderContainer } from '../header/header-container'
 import { Home } from './home'
 
 const meta: Meta<typeof Home> = {
-    title: 'Pages/Home',
+    title: 'Home/Home',
     component: Home,
 }
 
@@ -16,7 +18,9 @@ export const Default: Story = {
     render: () => {
         return (
             <Home>
+                <HeaderContainer />
                 <BodyContainer />
+                <FooterContainer />
             </Home>
         )
     },

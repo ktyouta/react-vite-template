@@ -28,7 +28,7 @@ export function callApi<T>({ method, url, body, onSuccess, onError, onFinally }:
             throw new Error(`Unsupported method: ${method}`);
     }
 
-    req
+    return req
         .then(res => onSuccess?.(res))
         .catch(err => onError?.(err))
         .finally(() => onFinally?.());

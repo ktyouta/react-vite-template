@@ -1,23 +1,23 @@
 import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
-import { BodyContainer } from '../body/body-ccontainer'
-import { Home } from './sample'
+import { BodyContainer } from '../body/body-container'
+import { Sample } from './sample'
 
-const meta: Meta<typeof Home> = {
-    title: 'Pages/Home',
-    component: Home,
+const meta: Meta<typeof Sample> = {
+    title: 'Sample/Sample',
+    component: Sample,
 }
 
 export default meta
-type Story = StoryObj<typeof Home>
+type Story = StoryObj<typeof Sample>
 
 
 export const Default: Story = {
     render: () => {
         return (
-            <Home>
+            <Sample>
                 <BodyContainer />
-            </Home>
+            </Sample>
         )
     },
 }
@@ -25,11 +25,11 @@ export const Default: Story = {
 export const Custom: Story = {
     render: () => {
         return (
-            <Home>
+            <Sample>
                 <Box>
                     message
                 </Box>
-            </Home>
+            </Sample>
         )
     },
 }

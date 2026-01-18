@@ -1,5 +1,5 @@
-import CheckboxComponent from '@mui/material/Checkbox';
 import { type CheckboxProps } from "@mui/material";
+import CheckboxComponent from '@mui/material/Checkbox';
 
 type Size = "small" | "medium" | "large";
 
@@ -15,6 +15,7 @@ export const Checkbox = ({
     onChange,
     disabled = false,
     size = 'medium',
+    ...rest
 }: propsType) => {
 
     return (
@@ -25,6 +26,7 @@ export const Checkbox = ({
             }}
             disabled={disabled}
             size={size}
+            {...rest}
         />
     );
 };

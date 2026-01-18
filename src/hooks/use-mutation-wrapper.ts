@@ -31,11 +31,11 @@ type propsType<U> = {
     afSuccessFn?: (res: resType<U>) => void,
     //失敗後の処理
     afErrorFn?: (res: errResType) => void,
-    finaliryFn?: () => void,
+    finallyFn?: () => void,
 }
 
 //HTTPメソッド
-type methodType = "POST" | "PUT" | "DELETE" | undefined;
+type methodType = "POST" | "PUT" | "DELETE";
 
 
 const useMutationWrapper = <
@@ -72,9 +72,9 @@ const useMutationWrapper = <
             case "DELETE":
                 return deleteQuery;
             default:
-                return undefined;
+                const _: never = props.method;
         }
-    }, [props.url]);
+    }, [props.url, props.method]);
 
     return useMutation({
         //HTTPリクエスト送信処理
