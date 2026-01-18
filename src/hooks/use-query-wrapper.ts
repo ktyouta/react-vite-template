@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type methodType = "GET" | "POST";
 
-type propsType<TData, RData, PData> = {
+type PropsType<TData, RData, PData> = {
     url: string,
     callback?: (data: TData) => RData,
     afSuccessFn?: (data: RData) => void,
@@ -17,7 +17,7 @@ const useQueryWrapper = <
     TData = unknown,
     RData = TData,
     PData extends {} = {},
->(props: propsType<TData, RData, PData>) => {
+>(props: PropsType<TData, RData, PData>) => {
 
     const afSuccessFnRef = useRef(props.afSuccessFn);
     const afErrorFnRef = useRef(props.afErrorFn);

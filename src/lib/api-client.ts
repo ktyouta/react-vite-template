@@ -1,3 +1,4 @@
+import { env } from '@/config/env';
 import { default as Axios, InternalAxiosRequestConfig } from 'axios';
 import { API_PATH } from '../consts/api-path';
 import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from './access-token-store';
@@ -22,9 +23,11 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const api = Axios.create({
+  baseURL: env.API_URL
 });
 
 const refreshApi = Axios.create({
+  baseURL: env.API_URL
 });
 
 api.interceptors.request.use(authRequestInterceptor);
@@ -81,11 +84,12 @@ api.interceptors.response.use(
             updateAccessToken(newAccessToken);
 
             // 認証エラーになったAPIを再度コール
-            queue.forEach(cb => {
+            const currentQueue = [...queue];
+            queue = [];
+
+            currentQueue.forEach(cb => {
               cb.resolve(newAccessToken);
             });
-
-            queue = [];
           } catch (err) {
 
             // リフレッシュ失敗

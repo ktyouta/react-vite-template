@@ -3,7 +3,7 @@ import CheckboxComponent from '@mui/material/Checkbox';
 
 type Size = "small" | "medium" | "large";
 
-type propsType = {
+type PropsType = {
     checked: boolean;
     onChange: (checked: boolean) => void;
     disabled?: boolean;
@@ -16,7 +16,7 @@ export const Checkbox = ({
     disabled = false,
     size = 'medium',
     ...rest
-}: propsType) => {
+}: PropsType) => {
 
     return (
         <CheckboxComponent

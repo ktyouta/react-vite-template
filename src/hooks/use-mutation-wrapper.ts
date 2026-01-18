@@ -21,7 +21,7 @@ export type errResType = {
 }
 
 //引数の型
-type propsType<U> = {
+type PropsType<U> = {
     url: string,
     method: methodType,
     queryKey?: QueryKey,
@@ -40,7 +40,7 @@ type methodType = "POST" | "PUT" | "DELETE";
 
 const useMutationWrapper = <
     T, U
->(props: propsType<U>) => {
+>(props: PropsType<U>) => {
 
     const queryClient = useQueryClient();
 

@@ -1,10 +1,10 @@
-import React, { type ReactNode } from "react";
-import { Button as MUIButton, type ButtonProps, type SxProps, type Theme } from "@mui/material";
+import { Button as MUIButton, type ButtonProps } from "@mui/material";
+import { type ReactNode } from "react";
 
 type Color = "red" | "blue" | "green";
 type Size = "small" | "medium" | "large";
 
-export type propsType = ButtonProps & {
+export type PropsType = ButtonProps & {
     colorType: Color,
     sizeType: Size,
     children: ReactNode,
@@ -29,7 +29,7 @@ const sizeMap: Record<Size, { padding: string; fontSize: string }> = {
     large: { padding: "10px 20px", fontSize: "1rem" },
 };
 
-export const Button = (props: propsType) => {
+export const Button = (props: PropsType) => {
 
     return (
         <MUIButton
