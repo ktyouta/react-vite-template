@@ -16,8 +16,6 @@ export const appRouter = [
 ]
 
 export const AppRouter = () => {
-
     const router = useRoutes(appRouter);
-
     return router;
 };

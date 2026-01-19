@@ -96,8 +96,10 @@ api.interceptors.response.use(
             resetAccessToken();
             resetLogin();
 
-            reject(err);
-            queue.forEach(cb => {
+            const currentQueue = [...queue];
+            queue = [];
+
+            currentQueue.forEach(cb => {
               cb.reject(err);
             });
           } finally {
