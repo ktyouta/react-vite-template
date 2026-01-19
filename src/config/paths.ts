@@ -5,4 +5,10 @@ export const paths = {
     sample: {
         path: '/sample',
     },
+    mypage: {
+        path: '/mypage',
+    },
+    login: {
+        path: 'login',
+    }
 } as const;

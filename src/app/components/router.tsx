@@ -1,10 +1,13 @@
+import { NotFound } from '@/components/notfound/not-found';
 import { paths } from '@/config/paths';
 import { HomeContainer } from '@/features/home/components/home/home-container';
+import { MyPage } from '@/features/mypage/components/mypage/mypage';
 import { SampleContainer } from '@/features/sample/components/sample/sample-container';
 import { useRoutes } from 'react-router-dom';
+import { ProtectedRoute } from './protected-route';
 
 
-export const appRouter = [
+const routerList = [
     {
         path: paths.home.path,
         element: <HomeContainer />
@@ -13,9 +16,21 @@ export const appRouter = [
         path: paths.sample.path,
         element: <SampleContainer />
     },
-]
+    {
+        path: paths.mypage.path,
+        element: (
+            <ProtectedRoute>
+                <MyPage />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: `*`,
+        element: <NotFound />
+    }
+];
 
 export const AppRouter = () => {
-    const router = useRoutes(appRouter);
+    const router = useRoutes(routerList);
     return router;
 };
