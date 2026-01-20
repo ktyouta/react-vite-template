@@ -1,3 +1,5 @@
+import { API_PATH } from "@/consts/api-path";
+import useQueryWrapper from "@/hooks/use-query-wrapper";
 import { LoginUserType } from "@/types/LoginUserType";
 import { createCtx } from "@/utils/create-ctx";
 import { ReactNode, useState } from "react";
@@ -19,6 +21,20 @@ export function LoginUserProvider(props: PropsType) {
     const [loginUser, setLoginUser] = useState<LoginUserType>();
     // 認証チェック中フラグ
     const [isAuthLoading, setIsAuthLoading] = useState(true);
+
+    // 認証チェック
+    useQueryWrapper(
+        {
+            url: API_PATH.AUTH,
+            afSuccessFn: (res: LoginUserType) => {
+                setLoginUser(res);
+                setIsAuthLoading(false);
+            },
+            afErrorFn: (err) => {
+                setIsAuthLoading(false);
+            }
+        }
+    );
 
     return (
         <IsAuthLoadingContext.Provider value={isAuthLoading}>

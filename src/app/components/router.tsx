@@ -4,6 +4,7 @@ import { HomeContainer } from '@/features/home/components/home/home-container';
 import { MyPage } from '@/features/mypage/components/mypage/mypage';
 import { SampleContainer } from '@/features/sample/components/sample/sample-container';
 import { useRoutes } from 'react-router-dom';
+import { AuthLoadingRoute } from './auth-loading-route';
 import { ProtectedRoute } from './protected-route';
 
 
@@ -31,6 +32,17 @@ const routerList = [
 ];
 
 export const AppRouter = () => {
-    const router = useRoutes(routerList);
+
+    const router = useRoutes(routerList.map((e) => {
+        return {
+            ...e,
+            element: (
+                <AuthLoadingRoute>
+                    {e.element}
+                </AuthLoadingRoute>
+            )
+        }
+    }));
+
     return router;
 };
