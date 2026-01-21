@@ -9,6 +9,6 @@ export const paths = {
         path: '/mypage',
     },
     login: {
-        path: 'login',
+        path: '/login',
     }
 } as const;

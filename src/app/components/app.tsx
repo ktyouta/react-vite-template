@@ -20,13 +20,13 @@ function App() {
   });
 
   return (
-    <ErrorBoundary
-      FallbackComponent={Errors}
-    >
-      <QueryClientProvider
-        client={queryClient}
+    <BrowserRouter>
+      <ErrorBoundary
+        FallbackComponent={Errors}
       >
-        <BrowserRouter>
+        <QueryClientProvider
+          client={queryClient}
+        >
           <ToastContainer
             position="top-center"
             autoClose={3000}
@@ -38,9 +38,9 @@ function App() {
           <ReactQueryDevtools
             initialIsOpen={false}
           />
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ErrorBoundary>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </BrowserRouter>
   )
 }
 

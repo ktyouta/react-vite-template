@@ -9,6 +9,7 @@ type PropsType = {
 
 export function ProtectedRoute(props: PropsType) {
 
+    // ログインユーザー情報
     const loginUser = LoginUserContext.useCtx();
 
     if (!loginUser) {

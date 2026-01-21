@@ -1,6 +1,7 @@
 import { NotFound } from '@/components/notfound/not-found';
 import { paths } from '@/config/paths';
 import { HomeContainer } from '@/features/home/components/home/home-container';
+import { LoginContainer } from '@/features/login/components/login-container';
 import { MyPage } from '@/features/mypage/components/mypage/mypage';
 import { SampleContainer } from '@/features/sample/components/sample/sample-container';
 import { useRoutes } from 'react-router-dom';
@@ -24,6 +25,10 @@ const routerList = [
                 <MyPage />
             </ProtectedRoute>
         )
+    },
+    {
+        path: paths.login.path,
+        element: <LoginContainer />
     },
     {
         path: `*`,

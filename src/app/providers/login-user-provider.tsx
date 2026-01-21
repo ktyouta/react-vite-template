@@ -1,13 +1,13 @@
 import { API_PATH } from "@/consts/api-path";
 import useQueryWrapper from "@/hooks/use-query-wrapper";
-import { LoginUserType } from "@/types/LoginUserType";
+import { LoginUserType } from "@/types/login-user-type";
 import { createCtx } from "@/utils/create-ctx";
 import { ReactNode, useState } from "react";
 
 // ログインユーザー情報
-export const LoginUserContext = createCtx<LoginUserType | undefined>();
+export const LoginUserContext = createCtx<LoginUserType | null>();
 // ログインユーザー情報(setter)
-export const SetLoginUserContext = createCtx<React.Dispatch<React.SetStateAction<LoginUserType | undefined>>>();
+export const SetLoginUserContext = createCtx<React.Dispatch<React.SetStateAction<LoginUserType | null>>>();
 // 認証チェック中フラグ
 export const IsAuthLoadingContext = createCtx<boolean>();
 
@@ -18,7 +18,7 @@ type PropsType = {
 export function LoginUserProvider(props: PropsType) {
 
     // ログインユーザー情報
-    const [loginUser, setLoginUser] = useState<LoginUserType>();
+    const [loginUser, setLoginUser] = useState<LoginUserType | null>(null);
     // 認証チェック中フラグ
     const [isAuthLoading, setIsAuthLoading] = useState(true);
 

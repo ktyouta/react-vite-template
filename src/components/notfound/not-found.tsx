@@ -1,4 +1,5 @@
 import { paths } from "@/config/paths";
+import { Home } from "@/features/home/components/home/home";
 import HomeIcon from '@mui/icons-material/Home';
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import { Box, Link, Typography } from "@mui/material";
@@ -21,6 +22,7 @@ export function NotFound() {
                 gap: 2,
             }}
         >
+            <Home>a</Home>
             <ReportProblemOutlinedIcon sx={{ fontSize: 72, color: "grey.400" }} />
             <Typography variant="h3" fontWeight="bold">
                 404

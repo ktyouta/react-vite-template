@@ -3,9 +3,9 @@ import React from "react";
 // アクセストークン
 export let accessTokenRef: string | null = null;
 // ログインリセット
-let resetLoginRef: resetLoginType | null = null;
+let resetLoginRef: ResetLoginType | null = null;
 
-type resetLoginType = {
+type ResetLoginType = {
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
     moveLogin(): void,
 }
@@ -29,7 +29,7 @@ export const resetAccessToken = () => {
  * ログインリセット処理を登録
  * @param setter 
  */
-export const registerResetLogin = (props: resetLoginType) => {
+export const registerResetLogin = (props: ResetLoginType) => {
     resetLoginRef = props;
 };
 

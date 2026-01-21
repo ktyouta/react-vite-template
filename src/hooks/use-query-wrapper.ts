@@ -2,14 +2,14 @@ import { api } from '@/lib/api-client';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
-type methodType = "GET" | "POST";
+type MethodType = "GET" | "POST";
 
 type PropsType<TData, RData, PData> = {
     url: string,
     callback?: (data: TData) => RData,
     afSuccessFn?: (data: RData) => void,
     afErrorFn?: (error: unknown) => void,
-    method?: methodType,
+    method?: MethodType,
     postData?: PData,
 }
 

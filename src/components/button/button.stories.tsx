@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button, type PropsType } from "./button";
 
 const meta: Meta<PropsType> = {
-    title: "Components/mui/button/button",
+    title: "Components/button",
     component: Button,
     tags: ["autodocs"],
     argTypes: {
