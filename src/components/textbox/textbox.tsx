@@ -1,31 +1,20 @@
-import {
-    InputBase,
-    InputBaseProps
-} from "@mui/material";
 import * as React from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = {
     error?: string;
     registration: Partial<UseFormRegisterReturn>;
-} & Omit<InputBaseProps, "error">;
+} & Omit<ComponentPropsWithoutRef<"input">, "ref">;
 
 export const Textbox = React.forwardRef<HTMLInputElement, Props>(
-    ({ error, registration, ...props }, ref) => {
+    ({ error, registration, className, ...props }, ref) => {
         return (
-            <InputBase
-                inputRef={ref}
+            <input
+                ref={ref}
                 {...registration}
                 {...props}
-                sx={{
-                    height: 36,
-                    border: "1px solid",
-                    borderColor: "divider",
-                    borderRadius: 1,
-                    px: 1.5,
-                    fontSize: "0.875rem",
-                    ...(props.sx ?? {}),
-                }}
+                className={`h-9 border border-gray-300 rounded px-1.5 text-sm ${className ?? ""}`}
             />
         );
     }

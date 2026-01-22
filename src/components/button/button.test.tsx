@@ -36,7 +36,7 @@ describe("Button component", () => {
         expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
-    it("applies correct color and size styles", () => {
+    it("applies correct color and size classes", () => {
 
         render(
             <Button
@@ -48,10 +48,10 @@ describe("Button component", () => {
 
         const button = screen.getByText("Styled Button");
 
-        expect(button).toHaveStyle({
-            backgroundColor: "#22c55e",
-            fontSize: "1rem",
-            padding: "10px 20px",
-        });
+        expect(button).toHaveClass("bg-green-500");
+        expect(button).toHaveClass("hover:bg-green-600");
+        expect(button).toHaveClass("py-2.5");
+        expect(button).toHaveClass("px-5");
+        expect(button).toHaveClass("text-base");
     });
 });

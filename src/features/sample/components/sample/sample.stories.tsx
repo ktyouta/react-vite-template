@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BodyContainer } from '../body/body-container'
 import { Sample } from './sample'
@@ -26,9 +25,9 @@ export const Custom: Story = {
     render: () => {
         return (
             <Sample>
-                <Box>
+                <div>
                     message
-                </Box>
+                </div>
             </Sample>
         )
     },

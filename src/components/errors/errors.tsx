@@ -1,8 +1,6 @@
 import { paths } from '@/config/paths';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import HomeIcon from '@mui/icons-material/Home';
-import { Box, Link, Stack, Typography } from '@mui/material';
 import { useErrorBoundary } from 'react-error-boundary';
+import { MdErrorOutline, MdHome } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
 export function Errors() {
@@ -13,63 +11,32 @@ export function Errors() {
     const { resetBoundary } = useErrorBoundary();
 
     return (
-        <Box
-            sx={{
-                width: "100vw",
-                height: "100vh",
-                p: 2,
-                boxSizing: "border-box",
-                color: "text.primary",
-                textAlign: "center",
-            }}
-        >
-            <Box
-                sx={{
-                    height: "87%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                <Stack spacing={2} alignItems="center">
-                    <ErrorOutlineIcon sx={{ fontSize: 40 }} color="error" />
-                    <Typography variant="h5" component="div">
+        <div className="w-screen h-screen p-2 box-border text-center">
+            <div className="h-[87%] flex items-center justify-center">
+                <div className="flex flex-col gap-2 items-center">
+                    <MdErrorOutline className="text-[40px] text-red-500" />
+                    <h5 className="text-xl font-bold">
                         エラーが発生しました
-                    </Typography>
-                    <Typography variant="body1">
+                    </h5>
+                    <p>
                         ホームに戻るか、時間をおいて再試行してください。
-                    </Typography>
-                </Stack>
-            </Box>
+                    </p>
+                </div>
+            </div>
 
-            <Box
-                sx={{
-                    height: "13%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 1,
-                    color: "primary.main",
-                }}
-            >
-                <HomeIcon />
-                <Link
-                    component="button"
-                    variant="body1"
+            <div className="h-[13%] flex justify-center items-center gap-1 text-blue-500">
+                <MdHome className="text-2xl" />
+                <button
+                    type="button"
                     onClick={() => {
                         resetBoundary();
                         navigate(`${paths.home.path}`);
                     }}
-                    sx={{
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                        fontSize: 20,
-                        "&:hover": { opacity: 0.8 },
-                    }}
+                    className="cursor-pointer underline text-xl hover:opacity-80"
                 >
                     ホームに戻る
-                </Link>
-            </Box>
-        </Box>
+                </button>
+            </div>
+        </div>
     );
 }

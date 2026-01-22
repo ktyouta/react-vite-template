@@ -1,53 +1,35 @@
-import { Button as MUIButton, type ButtonProps } from "@mui/material";
-import { type ReactNode } from "react";
+import { type ComponentPropsWithoutRef, type ReactNode } from "react";
 
 type Color = "red" | "blue" | "green";
 type Size = "small" | "medium" | "large";
 
-export type PropsType = ButtonProps & {
+export type PropsType = Omit<ComponentPropsWithoutRef<"button">, "color"> & {
     colorType: Color,
     sizeType: Size,
     children: ReactNode,
-    className?: string,
 };
 
-const colorMap: Record<Color, string> = {
-    red: "#ef4444",
-    blue: "#3b82f6",
-    green: "#22c55e",
+const colorClasses: Record<Color, string> = {
+    red: "bg-red-500 hover:bg-red-600",
+    blue: "bg-blue-500 hover:bg-blue-600",
+    green: "bg-green-500 hover:bg-green-600",
 };
 
-const colorHoverMap: Record<Color, string> = {
-    red: "#dc2626",
-    blue: "#2563eb",
-    green: "#16a34a",
+const sizeClasses: Record<Size, string> = {
+    small: "py-1 px-3 text-xs",
+    medium: "py-1.5 px-4 text-sm",
+    large: "py-2.5 px-5 text-base",
 };
 
-const sizeMap: Record<Size, { padding: string; fontSize: string }> = {
-    small: { padding: "4px 12px", fontSize: "0.75rem" },
-    medium: { padding: "6px 16px", fontSize: "0.875rem" },
-    large: { padding: "10px 20px", fontSize: "1rem" },
-};
-
-export const Button = (props: PropsType) => {
+export const Button = ({ colorType, sizeType, children, className, ...props }: PropsType) => {
 
     return (
-        <MUIButton
-            variant="contained"
-            disableElevation
+        <button
+            type="button"
             {...props}
-            sx={{
-                backgroundColor: colorMap[props.colorType],
-                fontSize: sizeMap[props.sizeType].fontSize,
-                padding: sizeMap[props.sizeType].padding,
-                textTransform: "none",
-                "&:hover": {
-                    backgroundColor: colorHoverMap[props.colorType],
-                },
-                ...props.sx,
-            }}
+            className={`${colorClasses[colorType]} ${sizeClasses[sizeType]} text-white rounded normal-case ${className ?? ""}`}
         >
-            {props.children}
-        </MUIButton>
+            {children}
+        </button>
     );
 };

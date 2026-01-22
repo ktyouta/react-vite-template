@@ -1,18 +1,9 @@
-import { Box } from '@mui/material';
 import { Spinner } from '..';
 
 export function Loading() {
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                width: '100vw',
-                height: '100vh',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <div className="flex w-screen h-screen items-center justify-center">
             <Spinner size={48} />
-        </Box>
+        </div>
     );
 }

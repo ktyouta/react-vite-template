@@ -1,4 +1,3 @@
-import { Box } from '@mui/material'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BodyContainer } from '../body/body-ccontainer'
 import { FooterContainer } from '../footer/footer-container'
@@ -30,9 +29,9 @@ export const Custom: Story = {
     render: () => {
         return (
             <Home>
-                <Box>
+                <div>
                     message
-                </Box>
+                </div>
             </Home>
         )
     },

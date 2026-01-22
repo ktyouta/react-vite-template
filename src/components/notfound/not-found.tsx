@@ -1,8 +1,6 @@
 import { paths } from "@/config/paths";
 import { Home } from "@/features/home/components/home/home";
-import HomeIcon from '@mui/icons-material/Home';
-import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
-import { Box, Link, Typography } from "@mui/material";
+import { MdHome, MdReportProblem } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 export function NotFound() {
@@ -11,52 +9,27 @@ export function NotFound() {
     const navigate = useNavigate();
 
     return (
-        <Box
-            sx={{
-                height: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                textAlign: "center",
-                gap: 2,
-            }}
-        >
+        <div className="h-screen flex flex-col justify-center items-center text-center gap-2">
             <Home>a</Home>
-            <ReportProblemOutlinedIcon sx={{ fontSize: 72, color: "grey.400" }} />
-            <Typography variant="h3" fontWeight="bold">
+            <MdReportProblem className="text-[72px] text-gray-400" />
+            <h3 className="text-3xl font-bold">
                 404
-            </Typography>
-            <Typography color="text.secondary">
+            </h3>
+            <p className="text-gray-500">
                 お探しのページは存在しないか、移動しました。
-            </Typography>
-            <Box
-                sx={{
-                    height: "13%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: 1,
-                    color: "primary.main",
-                }}
-            >
-                <HomeIcon />
-                <Link
-                    component="button"
-                    variant="body1"
+            </p>
+            <div className="h-[13%] flex justify-center items-center gap-1 text-blue-500">
+                <MdHome className="text-2xl" />
+                <button
+                    type="button"
                     onClick={() => {
                         navigate(`${paths.home.path}`);
                     }}
-                    sx={{
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                        fontSize: 20,
-                        "&:hover": { opacity: 0.8 },
-                    }}
+                    className="cursor-pointer underline text-xl hover:opacity-80"
                 >
                     ホームに戻る
-                </Link>
-            </Box>
-        </Box>
+                </button>
+            </div>
+        </div>
     );
 }

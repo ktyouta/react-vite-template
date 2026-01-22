@@ -1,13 +1,4 @@
-import {
-    Backdrop,
-    Box,
-    Button,
-    CircularProgress,
-    Container,
-    Stack,
-    TextField,
-    Typography,
-} from '@mui/material';
+import { Spinner } from '@/components';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 type PropsType = {
@@ -35,68 +26,67 @@ export function Login(props: PropsType) {
     } = props;
 
     return (
-        <Container maxWidth="sm">
-            <Backdrop
-                open={isLoading}
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'rgba(0, 0, 0, 0.1)' }}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
-            <Box sx={{ mt: 8, p: 4, boxShadow: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
-                <Typography variant="h5" component="h1" gutterBottom align="center" sx={{ fontWeight: 'bold', mb: 3 }}>
+        <div className="max-w-sm mx-auto">
+            {isLoading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10">
+                    <Spinner size={40} />
+                </div>
+            )}
+            <div className="mt-8 p-4 shadow-lg rounded-lg bg-white">
+                <h1 className="text-xl font-bold text-center mb-3">
                     ログイン
-                </Typography>
+                </h1>
                 {
                     errMessage &&
-                    <Typography color="error" variant="body2" sx={{ mb: 2, textAlign: 'center', fontWeight: 'bold' }}>
+                    <p className="text-red-500 text-sm mb-2 text-center font-bold">
                         {errMessage}
-                    </Typography>
+                    </p>
                 }
-                <Stack spacing={3}>
+                <div className="flex flex-col gap-3">
                     {/* ユーザー名 */}
-                    <Box>
-                        <Typography variant="subtitle2" sx={{ mb: 1 }}>ユーザー名</Typography>
-                        <TextField
-                            fullWidth
-                            size="small"
+                    <div>
+                        <p className="text-sm font-medium mb-1">ユーザー名</p>
+                        <input
+                            className={`w-full h-10 px-3 text-sm border rounded ${errors.userName ? 'border-red-500' : 'border-gray-300'}`}
                             placeholder="UserName"
                             autoComplete="off"
                             {...register("userName")}
-                            error={!!errors.userName}
-                            helperText={errors.userName?.message}
                         />
-                    </Box>
+                        {errors.userName?.message && (
+                            <p className="text-red-500 text-xs mt-1">{errors.userName.message}</p>
+                        )}
+                    </div>
                     {/* パスワード */}
-                    <Box>
-                        <Typography variant="subtitle2" sx={{ mb: 1 }}>パスワード</Typography>
-                        <TextField
-                            fullWidth
-                            size="small"
+                    <div>
+                        <p className="text-sm font-medium mb-1">パスワード</p>
+                        <input
+                            className={`w-full h-10 px-3 text-sm border rounded ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                             type="password"
                             autoComplete="off"
                             {...register("password")}
-                            error={!!errors.password}
-                            helperText={errors.password?.message}
                         />
-                    </Box>
-                    <Stack direction="row" spacing={2} justifyContent="center" sx={{ mt: 2 }}>
-                        <Button
-                            variant="contained"
-                            sx={{ bgcolor: 'black', '&:hover': { bgcolor: '#333' }, minWidth: 100, borderRadius: '20px' }}
+                        {errors.password?.message && (
+                            <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
+                        )}
+                    </div>
+                    <div className="flex flex-row gap-2 justify-center mt-2">
+                        <button
+                            type="button"
+                            className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
                             onClick={() => { }}
                         >
                             戻る
-                        </Button>
-                        <Button
-                            variant="contained"
-                            sx={{ bgcolor: 'black', '&:hover': { bgcolor: '#333' }, minWidth: 100, borderRadius: '20px' }}
+                        </button>
+                        <button
+                            type="button"
+                            className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
                             onClick={clickLogin}
                         >
                             ログイン
-                        </Button>
-                    </Stack>
-                </Stack>
-            </Box>
-        </Container>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

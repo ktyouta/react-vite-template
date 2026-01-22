@@ -1,5 +1,4 @@
-import { type CheckboxProps } from "@mui/material";
-import CheckboxComponent from '@mui/material/Checkbox';
+import { type ComponentPropsWithoutRef } from "react";
 
 type Size = "small" | "medium" | "large";
 
@@ -8,24 +7,32 @@ type PropsType = {
     onChange: (checked: boolean) => void;
     disabled?: boolean;
     size?: Size;
-} & CheckboxProps;
+} & Omit<ComponentPropsWithoutRef<"input">, "onChange" | "size">;
+
+const sizeClasses: Record<Size, string> = {
+    small: "w-4 h-4",
+    medium: "w-5 h-5",
+    large: "w-6 h-6",
+};
 
 export const Checkbox = ({
     checked,
     onChange,
     disabled = false,
     size = 'medium',
+    className,
     ...rest
 }: PropsType) => {
 
     return (
-        <CheckboxComponent
+        <input
+            type="checkbox"
             checked={checked}
-            onChange={(_, value) => {
-                onChange(value);
+            onChange={(e) => {
+                onChange(e.target.checked);
             }}
             disabled={disabled}
-            size={size}
+            className={`${sizeClasses[size]} accent-blue-500 ${className ?? ""}`}
             {...rest}
         />
     );

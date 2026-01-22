@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { ReactNode } from 'react';
 import '../../../../App.css';
 
@@ -9,11 +8,8 @@ type Props = {
 export const Home = (props: Props) => {
 
     return (
-        <Box
-            sx={{
-            }}
-        >
+        <div>
             {props.children}
-        </Box>
+        </div>
     )
 };
