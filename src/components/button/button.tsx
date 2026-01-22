@@ -1,4 +1,5 @@
 import { type ComponentPropsWithoutRef, type ReactNode } from "react";
+import { cn } from "@/utils/cn";
 
 type Color = "red" | "blue" | "green";
 type Size = "small" | "medium" | "large";
@@ -27,7 +28,12 @@ export const Button = ({ colorType, sizeType, children, className, ...props }: P
         <button
             type="button"
             {...props}
-            className={`${colorClasses[colorType]} ${sizeClasses[sizeType]} text-white rounded normal-case ${className ?? ""}`}
+            className={cn(
+                colorClasses[colorType],
+                sizeClasses[sizeType],
+                "text-white rounded normal-case",
+                className
+            )}
         >
             {children}
         </button>

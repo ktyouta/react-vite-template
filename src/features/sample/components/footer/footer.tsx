@@ -1,5 +1,3 @@
-import '../../../../App.css';
-
 type Props = {
     message: string,
 }
@@ -7,7 +5,7 @@ type Props = {
 export const Footer = (props: Props) => {
 
     return (
-        <p className="read-the-docs">
+        <p className="text-[#888]">
             Click on the Vite and React logos to learn more {props.message}
         </p>
     )

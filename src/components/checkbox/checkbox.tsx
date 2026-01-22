@@ -1,4 +1,5 @@
 import { type ComponentPropsWithoutRef } from "react";
+import { cn } from "@/utils/cn";
 
 type Size = "small" | "medium" | "large";
 
@@ -32,7 +33,7 @@ export const Checkbox = ({
                 onChange(e.target.checked);
             }}
             disabled={disabled}
-            className={`${sizeClasses[size]} accent-blue-500 ${className ?? ""}`}
+            className={cn(sizeClasses[size], "accent-blue-500", className)}
             {...rest}
         />
     );

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../App.css';
 import reactLogo from '../../../../assets/react.svg';
 import viteLogo from '/vite.svg';
 
@@ -13,10 +12,18 @@ export const Header = (props: Props) => {
         <React.Fragment>
             <div>
                 <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                    <img
+                        src={viteLogo}
+                        className="h-[6em] p-[1.5em] transition-[filter] duration-300 hover:drop-shadow-[0_0_2em_#646cffaa]"
+                        alt="Vite logo"
+                    />
                 </a>
                 <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
+                    <img
+                        src={reactLogo}
+                        className="h-[6em] p-[1.5em] transition-[filter] duration-300 hover:drop-shadow-[0_0_2em_#61dafbaa] motion-safe:animate-[spin_20s_linear_infinite]"
+                        alt="React logo"
+                    />
                 </a>
             </div>
             <h1>Vite + React {props.message}</h1>

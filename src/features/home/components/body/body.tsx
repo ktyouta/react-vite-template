@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../../App.css';
 
 type Props = {
     count: number,
@@ -11,7 +10,7 @@ export const Body = (props: Props) => {
     return (
         <React.Fragment>
             <h1>Home Vite + React</h1>
-            <div className="card">
+            <div className="p-8">
                 <button onClick={props.click}>
                     count is {props.count}
                 </button>

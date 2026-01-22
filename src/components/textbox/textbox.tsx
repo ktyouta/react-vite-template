@@ -1,6 +1,7 @@
 import * as React from "react";
 import { type ComponentPropsWithoutRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { cn } from "@/utils/cn";
 
 type Props = {
     error?: string;
@@ -14,7 +15,10 @@ export const Textbox = React.forwardRef<HTMLInputElement, Props>(
                 ref={ref}
                 {...registration}
                 {...props}
-                className={`h-9 border border-gray-300 rounded px-1.5 text-sm ${className ?? ""}`}
+                className={cn(
+                    "h-9 border border-gray-300 rounded px-1.5 text-sm",
+                    className
+                )}
             />
         );
     }

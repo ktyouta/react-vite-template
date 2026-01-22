@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import '../../../../App.css';
 
 type Props = {
     children: ReactNode
@@ -8,7 +7,7 @@ type Props = {
 export const Home = (props: Props) => {
 
     return (
-        <div>
+        <div className='flex flex-col w-full h-full items-center justify-center'>
             {props.children}
         </div>
     )
