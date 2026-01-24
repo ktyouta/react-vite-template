@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { BodyContainer } from '../body/body-ccontainer'
+import { BodyContainer } from '../body/body-container'
 import { FooterContainer } from '../footer/footer-container'
 import { HeaderContainer } from '../header/header-container'
 import { Home } from './home'

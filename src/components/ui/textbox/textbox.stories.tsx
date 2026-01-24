@@ -16,12 +16,6 @@ type Story = StoryObj<typeof Textbox>;
 
 export const Default: Story = {};
 
-export const WithError: Story = {
-    args: {
-        error: "入力必須です",
-    },
-};
-
 export const Disabled: Story = {
     args: {
         disabled: true,

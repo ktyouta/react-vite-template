@@ -1,7 +1,7 @@
+import { apiPaths } from '@/config/api-paths';
 import { env } from '@/config/env';
+import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from '@/stores/access-token-store';
 import { default as Axios, InternalAxiosRequestConfig } from 'axios';
-import { API_PATH } from '../consts/api-path';
-import { accessTokenRef, resetAccessToken, resetLogin, updateAccessToken } from './access-token-store';
 
 type QueueItem = {
   resolve: (accessToken: string) => void;
@@ -71,7 +71,7 @@ api.interceptors.response.use(
 
             // リフレッシュ
             const res = await refreshApi.post(
-              API_PATH.REFRESH,
+              apiPaths.refresh,
               {},
               {
                 headers: {

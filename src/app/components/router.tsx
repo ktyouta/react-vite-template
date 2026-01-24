@@ -1,4 +1,4 @@
-import { NotFound } from '@/components/notfound/not-found';
+import { NotFound } from '@/components/pages/notfound/not-found';
 import { paths } from '@/config/paths';
 import { HomeContainer } from '@/features/home/components/home/home-container';
 import { LoginContainer } from '@/features/login/components/login-container';

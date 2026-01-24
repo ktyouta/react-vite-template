@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# React Vite Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite を使用したフロントエンド開発用テンプレートです。
 
-Currently, two official plugins are available:
+## 技術スタック
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| カテゴリ | 技術 |
+|---------|------|
+| フレームワーク | React 19 |
+| ビルドツール | Vite |
+| 言語 | TypeScript |
+| スタイリング | Tailwind CSS |
+| 状態管理 | React Query (TanStack Query) |
+| ルーティング | React Router v7 |
+| フォーム | React Hook Form + Zod |
+| API通信 | Axios |
+| テスト | Vitest + Testing Library |
+| コンポーネントカタログ | Storybook |
+| Linting | ESLint |
 
-## React Compiler
+## セットアップ
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 前提条件
 
-## Expanding the ESLint configuration
+- Node.js 18以上
+- npm 9以上
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### インストール
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# 依存関係のインストール
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 環境変数ファイルの作成
+cp .env.example .env.development
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 環境変数
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+`.env.development` に以下の環境変数を設定してください：
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| 変数名 | 説明 |
+|--------|------|
+| VITE_APP_API_URL | APIサーバーのベースURL |
+
+## 開発
+
+```bash
+# 開発サーバー起動
+npm run dev
+
+# Storybook起動
+npm run storybook
+
+# テスト実行
+npm run test
+
+# Lintチェック
+npm run lint
+
+# ビルド
+npm run build
 ```
+
+## フォルダ構成
+
+```
+src/
+├── app/                    # アプリケーションエントリポイント
+│   ├── components/         # App, Router, ProtectedRoute等
+│   └── providers/          # グローバルProvider
+├── components/             # 共通コンポーネント
+│   ├── ui/                 # UIプリミティブ (Button, Textbox等)
+│   └── pages/              # ページレベルコンポーネント (NotFound, Loading等)
+├── config/                 # 設定 (paths, env)
+├── features/               # 機能別モジュール
+│   └── [feature]/
+│       ├── api/            # API呼び出し
+│       ├── components/     # 機能固有コンポーネント
+│       ├── hooks/          # 機能固有フック
+│       └── types/          # 機能固有型定義
+├── hooks/                  # 共通カスタムフック
+├── lib/                    # 外部ライブラリラッパー
+├── testing/                # テスト設定・ユーティリティ
+├── types/                  # 共通型定義
+└── utils/                  # ユーティリティ関数
+```
+
+## コーディング規約
+
+- TypeScriptの厳密モード（strict: true）を使用
+- コンポーネントはfunction宣言で定義
+- スタイルはTailwind CSSのみ使用
+- テストはVitestで記述
+- パスエイリアス `@/` を使用（例: `import { Button } from '@/components'`）
+
+## 新機能の追加手順
+
+1. `src/features/` 配下に機能フォルダを作成
+2. components, hooks, api, types を必要に応じて作成
+3. ルーティングを `src/app/components/router.tsx` に追加
+4. テストとStorybookを作成

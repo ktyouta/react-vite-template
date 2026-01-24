@@ -1,4 +1,4 @@
-import { API_PATH } from "@/consts/api-path";
+import { apiPaths } from "@/config/api-paths";
 import useQueryWrapper from "@/hooks/use-query-wrapper";
 import { LoginUserType } from "@/types/login-user-type";
 import { createCtx } from "@/utils/create-ctx";
@@ -25,7 +25,7 @@ export function LoginUserProvider(props: PropsType) {
     // 認証チェック
     useQueryWrapper(
         {
-            url: API_PATH.AUTH,
+            url: apiPaths.auth,
             afSuccessFn: (res: LoginUserType) => {
                 setLoginUser(res);
                 setIsAuthLoading(false);

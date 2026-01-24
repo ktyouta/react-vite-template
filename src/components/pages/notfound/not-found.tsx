@@ -1,5 +1,4 @@
 import { paths } from "@/config/paths";
-import { Home } from "@/features/home/components/home/home";
 import { MdHome, MdReportProblem } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +9,6 @@ export function NotFound() {
 
     return (
         <div className="h-screen flex flex-col justify-center items-center text-center gap-2">
-            <Home>a</Home>
             <MdReportProblem className="text-[72px] text-gray-400" />
             <h3 className="text-3xl font-bold">
                 404

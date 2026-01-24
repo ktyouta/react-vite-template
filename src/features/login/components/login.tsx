@@ -1,4 +1,4 @@
-import { Spinner } from '@/components';
+import { Spinner, Textbox } from '@/components';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 type PropsType = {
@@ -26,13 +26,13 @@ export function Login(props: PropsType) {
     } = props;
 
     return (
-        <div className="max-w-sm mx-auto">
+        <div className="w-full min-h-screen bg-[#dcdcdc] flex items-center justify-center">
             {isLoading && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10">
                     <Spinner size={40} />
                 </div>
             )}
-            <div className="mt-8 p-4 shadow-lg rounded-lg bg-white">
+            <div className="p-4 w-[500px]">
                 <h1 className="text-xl font-bold text-center mb-3">
                     ログイン
                 </h1>
@@ -46,11 +46,10 @@ export function Login(props: PropsType) {
                     {/* ユーザー名 */}
                     <div>
                         <p className="text-sm font-medium mb-1">ユーザー名</p>
-                        <input
-                            className={`w-full h-10 px-3 text-sm border rounded ${errors.userName ? 'border-red-500' : 'border-gray-300'}`}
-                            placeholder="UserName"
+                        <Textbox
+                            className={`w-full h-10 px-3 ${errors.userName ? 'border-red-500' : ''}`}
                             autoComplete="off"
-                            {...register("userName")}
+                            registration={register("userName")}
                         />
                         {errors.userName?.message && (
                             <p className="text-red-500 text-xs mt-1">{errors.userName.message}</p>
@@ -59,11 +58,11 @@ export function Login(props: PropsType) {
                     {/* パスワード */}
                     <div>
                         <p className="text-sm font-medium mb-1">パスワード</p>
-                        <input
-                            className={`w-full h-10 px-3 text-sm border rounded ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                        <Textbox
+                            className={`w-full h-10 px-3 ${errors.password ? 'border-red-500' : ''}`}
                             type="password"
                             autoComplete="off"
-                            {...register("password")}
+                            registration={register("password")}
                         />
                         {errors.password?.message && (
                             <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>

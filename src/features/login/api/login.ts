@@ -1,4 +1,4 @@
-import { API_PATH } from '@/consts/api-path';
+import { apiPaths } from '@/config/api-paths';
 import useMutationWrapper, { errResType } from '@/hooks/use-mutation-wrapper';
 import { LoginUserType } from '@/types/login-user-type';
 
@@ -10,7 +10,7 @@ type UseLoginMutationProps = {
 export function useLoginMutation(props: UseLoginMutationProps) {
 
     return useMutationWrapper({
-        url: API_PATH.LOGIN,
+        url: apiPaths.login,
         method: "POST",
         afSuccessFn: (res: unknown) => {
             props.onSuccess(res as LoginUserType);

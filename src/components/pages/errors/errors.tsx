@@ -11,7 +11,7 @@ export function Errors() {
     const { resetBoundary } = useErrorBoundary();
 
     return (
-        <div className="w-screen h-screen p-2 box-border text-center">
+        <div className="w-full h-screen p-2 box-border text-center">
             <div className="h-[87%] flex items-center justify-center">
                 <div className="flex flex-col gap-2 items-center">
                     <MdErrorOutline className="text-[40px] text-red-500" />
@@ -23,11 +23,9 @@ export function Errors() {
                     </p>
                 </div>
             </div>
-
             <div className="h-[13%] flex justify-center items-center gap-1 text-blue-500">
-                <MdHome className="text-2xl" />
-                <button
-                    type="button"
+                <MdHome className="text-2xl mr-1" />
+                <span
                     onClick={() => {
                         resetBoundary();
                         navigate(`${paths.home.path}`);
@@ -35,7 +33,7 @@ export function Errors() {
                     className="cursor-pointer underline text-xl hover:opacity-80"
                 >
                     ホームに戻る
-                </button>
+                </span>
             </div>
         </div>
     );
