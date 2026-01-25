@@ -7,10 +7,10 @@ type PropsType = {
     onError: (message: string) => void;
 };
 
-export function useLoginMutation(props: PropsType) {
+export function useSignupMutation(props: PropsType) {
 
     return useMutationWrapper({
-        url: apiPaths.login,
+        url: apiPaths.signup,
         method: "POST",
         afSuccessFn: (res: unknown) => {
             props.onSuccess(res as LoginUserType);

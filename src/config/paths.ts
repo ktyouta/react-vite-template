@@ -10,5 +10,8 @@ export const paths = {
     },
     login: {
         path: '/login',
+    },
+    signup: {
+        path: '/signup',
     }
 } as const;
