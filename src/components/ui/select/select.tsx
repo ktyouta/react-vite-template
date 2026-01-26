@@ -1,7 +1,7 @@
+import { cn } from "@/utils/cn";
 import * as React from "react";
 import { type ComponentPropsWithoutRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { cn } from "@/utils/cn";
 
 type Option = {
     value: string;
@@ -22,7 +22,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(
                 {...registration}
                 {...props}
                 className={cn(
-                    "h-9 border border-gray-300 rounded px-2 text-sm bg-white",
+                    "border border-[#767676] rounded ",
                     "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
                     className
                 )}

@@ -4,12 +4,12 @@ import { useCreateYearList } from '@/hooks/use-create-year-list';
 import { LoginUserType } from '@/types/login-user-type';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useSignupMutation } from '../api/signup';
-import { SignupRequestType } from '../types/signup-request-type';
-import { useSignupForm } from './use-signup.form';
+import { useUpdateUserMutation } from '../api/update-user';
+import { UpdateUserRequestType } from '../types/update-user-request-type';
+import { useUpdateUserForm } from './use-update-user.form';
 
 
-export function useSignup() {
+export function useUpdateUser() {
 
     // ルーティング用
     const navigate = useNavigate();
@@ -20,9 +20,9 @@ export function useSignup() {
     // 年リスト
     const yearCoomboList = useCreateYearList();
     // フォーム
-    const { register, handleSubmit, formState: { errors }, reset } = useSignupForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useUpdateUserForm();
     // 登録リクエスト
-    const postMutation = useSignupMutation({
+    const postMutation = useUpdateUserMutation({
         // 正常終了後の処理
         onSuccess: (res: unknown) => {
             setLoginUserInfo(res as LoginUserType);
@@ -33,11 +33,6 @@ export function useSignup() {
 
             //エラーメッセージを表示
             setErrMessage(message);
-
-            reset({
-                password: ``,
-                confirmPassword: ``,
-            });
         },
     });
 
@@ -46,19 +41,13 @@ export function useSignup() {
      */
     const handleConfirm = handleSubmit((data) => {
 
-        const userName = data.userName;
-        const password = data.password
-        const confirmPassword = data.confirmPassword;
-
-        const body: SignupRequestType = {
-            userName,
-            password,
+        const body: UpdateUserRequestType = {
+            userName: data.userName,
             birthday: {
                 year: data.birthday.year,
                 month: data.birthday.month,
                 day: data.birthday.day,
             },
-            confirmPassword
         };
 
         // 登録リクエスト呼び出し

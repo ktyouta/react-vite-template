@@ -1,12 +1,12 @@
-import { useSiginup } from "../hooks/use-signup";
-import { Siginup } from "./signup";
+import { useSignup } from "../hooks/use-signup";
+import { Signup } from "./signup";
 
-export function SiginupContainer() {
+export function SignupContainer() {
 
-    const props = useSiginup();
+    const props = useSignup();
 
     return (
-        <Siginup
+        <Signup
             {...props}
         />
     );

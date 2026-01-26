@@ -11,7 +11,13 @@ export const paths = {
     login: {
         path: '/login',
     },
-    signup: {
-        path: '/signup',
+    siginup: {
+        path: '/siginup',
+    },
+    updateUser: {
+        path: '/update-user',
+    },
+    updatePassword: {
+        path: '/update-password',
     }
 } as const;

@@ -4,7 +4,9 @@ import { HomeContainer } from '@/features/home/components/home/home-container';
 import { LoginContainer } from '@/features/login/components/login-container';
 import { MyPage } from '@/features/mypage/components/mypage/mypage';
 import { SampleContainer } from '@/features/sample/components/sample/sample-container';
-import { SiginupContainer } from '@/features/signup/components/signup-container';
+import { SignupContainer } from '@/features/signup/components/signup-container';
+import { UpdatePasswordContainer } from '@/features/updatepassword/components/update-password-container';
+import { UpdateUserContainer } from '@/features/updateuser/components/update-user-container';
 import { ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { AuthLoadingRoute } from './auth-loading-route';
@@ -38,11 +40,27 @@ const routerList: { path: string, element: ReactNode }[] = [
         )
     },
     {
-        path: paths.signup.path,
+        path: paths.siginup.path,
         element: (
             <GuestRoute>
-                <SiginupContainer />
+                <SignupContainer />
             </GuestRoute>
+        )
+    },
+    {
+        path: paths.updateUser.path,
+        element: (
+            <ProtectedRoute>
+                <UpdateUserContainer />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: paths.updatePassword.path,
+        element: (
+            <ProtectedRoute>
+                <UpdatePasswordContainer />
+            </ProtectedRoute>
         )
     },
     {

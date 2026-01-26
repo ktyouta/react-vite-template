@@ -18,8 +18,6 @@ type PropsType = {
             month: string;
             day: string;
         };
-        password: string;
-        confirmPassword: string;
     }>,
     errors: FieldErrors<{
         userName: string;
@@ -28,13 +26,11 @@ type PropsType = {
             month: string;
             day: string;
         };
-        password: string;
-        confirmPassword: string;
     }>,
     handleConfirm: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
 }
 
-export function Signup(props: PropsType) {
+export function UpdateUser(props: PropsType) {
 
     const {
         errMessage,
@@ -55,7 +51,7 @@ export function Signup(props: PropsType) {
             )}
             <div className="box-border w-[382px] mx-auto md:ml-0 md:mr-0 md:w-[550px]">
                 <div className="text-[30px] mb-[8%]">
-                    アカウント作成
+                    ユーザー情報更新
                 </div>
                 {
                     errMessage &&
@@ -103,32 +99,6 @@ export function Signup(props: PropsType) {
                         <p className="text-red-500 text-xs mt-1">{errors.birthday.message}</p>
                     )}
                 </div>
-                <div className="mb-[8%]">
-                    <div>パスワード</div>
-                    <Textbox
-                        className="w-[98%] h-[33px] px-2 border"
-                        type="password"
-                        maxLength={30}
-                        autoComplete="off"
-                        registration={register("password")}
-                    />
-                    {errors.password?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
-                    )}
-                </div>
-                <div className="mb-[8%]">
-                    <div>確認用パスワード</div>
-                    <Textbox
-                        className="w-[98%] h-[33px] px-2 border"
-                        type="password"
-                        maxLength={30}
-                        autoComplete="off"
-                        registration={register("confirmPassword")}
-                    />
-                    {errors.confirmPassword?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
-                    )}
-                </div>
                 <div className="flex flex-row gap-2 justify-center mt-2">
                     <button
                         type="button"
@@ -142,7 +112,7 @@ export function Signup(props: PropsType) {
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
                         onClick={handleConfirm}
                     >
-                        登録
+                        更新
                     </button>
                 </div>
             </div>

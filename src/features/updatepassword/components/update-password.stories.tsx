@@ -1,14 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Login } from './login';
+import { UpdatePassword } from './update-password';
 
-const meta: Meta<typeof Login> = {
-    title: 'Features/Login',
-    component: Login,
+const meta: Meta<typeof UpdatePassword> = {
+    title: 'Features/UpdatePassword',
+    component: UpdatePassword,
     parameters: {
         layout: 'fullscreen',
     },
     args: {
         errMessage: '',
+        clickBack: () => {
+            alert("戻るボタンが押されました");
+        },
         isLoading: false,
         register: (() => ({
             name: 'name',
@@ -17,13 +20,13 @@ const meta: Meta<typeof Login> = {
             ref: () => { },
         })) as any,
         errors: {},
-        clickLogin: async () => {
-            alert("ログインボタンが押されました");
+        handleConfirm: async () => {
+            alert("登録ボタンが押されました");
         },
     },
 };
 
 export default meta;
-type Story = StoryObj<typeof Login>;
+type Story = StoryObj<typeof UpdatePassword>;
 
 export const Default: Story = {};
