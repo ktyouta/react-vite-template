@@ -26,6 +26,13 @@ const meta: Meta<typeof UpdateUser> = {
             ref: () => { },
         })) as any,
         errors: {},
+        watch: ((name: string) => {
+            const values: Record<string, string> = {
+                'birthday.year': '2000',
+                'birthday.month': '01',
+            };
+            return values[name] ?? '';
+        }) as any,
         handleConfirm: async () => {
             alert("登録ボタンが押されました");
         },

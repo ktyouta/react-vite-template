@@ -71,7 +71,7 @@ export function UpdatePassword(props: PropsType) {
                         <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
                     )}
                 </div>
-                <div className="flex flex-row gap-2 justify-center mt-2">
+                <div className="flex flex-row gap-2 mt-2">
                     <button
                         type="button"
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"

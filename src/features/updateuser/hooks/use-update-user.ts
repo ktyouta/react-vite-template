@@ -20,7 +20,7 @@ export function useUpdateUser() {
     // 年リスト
     const yearCoomboList = useCreateYearList();
     // フォーム
-    const { register, handleSubmit, formState: { errors }, reset } = useUpdateUserForm();
+    const { register, handleSubmit, formState: { errors }, reset, watch } = useUpdateUserForm();
     // 登録リクエスト
     const postMutation = useUpdateUserMutation({
         // 正常終了後の処理
@@ -69,5 +69,6 @@ export function useUpdateUser() {
         register,
         errors,
         handleConfirm,
+        watch,
     }
 }

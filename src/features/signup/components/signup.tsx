@@ -1,7 +1,8 @@
 import { Select, Spinner, Textbox } from "@/components";
-import { DAY_LIST, MONTH_LIST } from "@/constants/date-options";
+import { MONTH_LIST } from "@/constants/date-options";
+import { getDayList } from "@/utils/date-select-options";
 import { BaseSyntheticEvent } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 type PropsType = {
     errMessage: string,
@@ -31,6 +32,16 @@ type PropsType = {
         password: string;
         confirmPassword: string;
     }>,
+    watch: UseFormWatch<{
+        userName: string;
+        birthday: {
+            year: string;
+            month: string;
+            day: string;
+        };
+        password: string;
+        confirmPassword: string;
+    }>,
     handleConfirm: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
 }
 
@@ -43,7 +54,8 @@ export function Signup(props: PropsType) {
         isLoading,
         register,
         errors,
-        handleConfirm
+        handleConfirm,
+        watch,
     } = { ...props };
 
     return (
@@ -93,7 +105,7 @@ export function Signup(props: PropsType) {
                         />
                         <div className="mr-[2px] shrink-0">月</div>
                         <Select
-                            options={DAY_LIST}
+                            options={getDayList(watch('birthday.year'), watch('birthday.month'))}
                             className="w-[68%] h-[39px]"
                             registration={register("birthday.day")}
                         />
@@ -129,7 +141,7 @@ export function Signup(props: PropsType) {
                         <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
                     )}
                 </div>
-                <div className="flex flex-row gap-2 justify-center mt-2">
+                <div className="flex flex-row gap-2 mt-2">
                     <button
                         type="button"
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
