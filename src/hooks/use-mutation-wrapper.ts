@@ -1,36 +1,19 @@
 import { api } from '@/lib/api-client';
 import { useMutation, useQueryClient, type QueryKey } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useMemo } from 'react';
 
-
-//レスポンスの型
-export type resType<T> = {
-    status: number,
-    message: string,
-    data: T,
-}
-
-//エラーレスポンスの型
-export type errResType = {
-    response: {
-        data: {
-            message: string,
-            status: number,
-        }
-    }
-}
-
 //引数の型
-type PropsType<U> = {
+type PropsType = {
     url: string,
     method: methodType,
     queryKey?: QueryKey,
     //処理待ち中の処理
     waitingFn?: () => void,
-    //処理成功後の処理
-    afSuccessFn?: (res: resType<U>) => void,
-    //失敗後の処理
-    afErrorFn?: (res: errResType) => void,
+    //処理成功後の処理（バリデーションは呼び出し側で実施）
+    afSuccessFn?: (res: unknown) => void,
+    //失敗後の処理（バリデーションは呼び出し側で実施）
+    afErrorFn?: (res: unknown) => void,
     finallyFn?: () => void,
 }
 
@@ -38,9 +21,7 @@ type PropsType<U> = {
 type methodType = "POST" | "PUT" | "DELETE";
 
 
-const useMutationWrapper = <
-    T, U
->(props: PropsType<U>) => {
+const useMutationWrapper = <T,>(props: PropsType) => {
 
     const queryClient = useQueryClient();
 
@@ -81,7 +62,13 @@ const useMutationWrapper = <
         mutationFn: queryMethod ? (data: T) => queryMethod(data) : undefined,
         onMutate: props.waitingFn ?? undefined,
         onSuccess: props.afSuccessFn ?? undefined,
-        onError: props.afErrorFn ?? undefined,
+        onError: (error: Error) => {
+            // AxiosエラーからAPIレスポンスを抽出して渡す
+            if (props.afErrorFn) {
+                const axiosError = error as AxiosError;
+                props.afErrorFn(axiosError.response?.data);
+            }
+        },
         onSettled: props.queryKey ? () => {
             if (props.queryKey) {
                 queryClient.invalidateQueries({ queryKey: props.queryKey });

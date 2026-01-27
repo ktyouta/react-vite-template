@@ -1,6 +1,10 @@
 import { apiPaths } from '@/config/api-paths';
-import useMutationWrapper, { errResType } from '@/hooks/use-mutation-wrapper';
-import { LoginUserType } from '@/types/login-user-type';
+import { MESSAGES } from '@/constants/messages';
+import useMutationWrapper from '@/hooks/use-mutation-wrapper';
+import { ApiErrorResponseSchema, createApiResponseSchema } from '@/lib/api-response';
+import { LoginUserSchema, LoginUserType } from '@/types/login-user-type';
+
+const LoginResponseSchema = createApiResponseSchema(LoginUserSchema);
 
 type PropsType = {
     onSuccess: (data: LoginUserType) => void;
@@ -13,11 +17,22 @@ export function useLoginMutation(props: PropsType) {
         url: apiPaths.login,
         method: "POST",
         afSuccessFn: (res: unknown) => {
-            props.onSuccess(res as LoginUserType);
+            const result = LoginResponseSchema.safeParse(res);
+            if (!result.success) {
+                console.error(MESSAGES.API_VALIDATION_ERROR, result.error);
+                props.onError(MESSAGES.GENERIC_ERROR);
+                return;
+            }
+            props.onSuccess(result.data.data);
         },
-        afErrorFn: (res: errResType) => {
-            const errMessage = res.response.data.message;
-            props.onError(errMessage);
+        afErrorFn: (res: unknown) => {
+            const result = ApiErrorResponseSchema.safeParse(res);
+            if (!result.success) {
+                console.error(MESSAGES.API_VALIDATION_ERROR, result.error);
+                props.onError(MESSAGES.GENERIC_ERROR);
+                return;
+            }
+            props.onError(result.data.message);
         },
     });
-};
+}
