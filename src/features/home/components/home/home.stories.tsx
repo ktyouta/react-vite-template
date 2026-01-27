@@ -5,7 +5,7 @@ import { HeaderContainer } from '../header/header-container'
 import { Home } from './home'
 
 const meta: Meta<typeof Home> = {
-    title: 'Home/Home',
+    title: 'features/home/home',
     component: Home,
 }
 

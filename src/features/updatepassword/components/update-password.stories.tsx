@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { UpdatePassword } from './update-password';
 
 const meta: Meta<typeof UpdatePassword> = {
-    title: 'Features/UpdatePassword',
+    title: 'features/updatepassword',
     component: UpdatePassword,
     parameters: {
         layout: 'fullscreen',

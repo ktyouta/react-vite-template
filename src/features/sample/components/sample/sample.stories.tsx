@@ -3,7 +3,7 @@ import { BodyContainer } from '../body/body-container'
 import { Sample } from './sample'
 
 const meta: Meta<typeof Sample> = {
-    title: 'Sample/Sample',
+    title: 'features/sample/sample',
     component: Sample,
 }
 

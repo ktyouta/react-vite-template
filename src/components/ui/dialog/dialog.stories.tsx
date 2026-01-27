@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Dialog } from "./dialog";
 
 const meta: Meta<typeof Dialog> = {
-    title: "Components/Dialog",
+    title: "components/ui/dialog",
     component: Dialog,
     args: {
         isOpen: false,

@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Errors } from './errors';
 
 const meta: Meta<typeof Errors> = {
-    title: 'Pages/Errors',
+    title: 'components/pages/errors',
     component: Errors,
     decorators: [
         (Story) => (

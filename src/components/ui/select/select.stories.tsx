@@ -16,7 +16,7 @@ const prefectureOptions = [
 ];
 
 const meta: Meta<typeof Select> = {
-    title: "Components/Select",
+    title: "components/ui/select",
     component: Select,
     args: {
         options: sampleOptions,

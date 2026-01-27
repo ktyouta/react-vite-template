@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Textarea } from "./textarea";
 
 const meta: Meta<typeof Textarea> = {
-    title: "Components/Textarea",
+    title: "components/ui/textarea",
     component: Textarea,
     args: {
         placeholder: "テキストを入力してください",

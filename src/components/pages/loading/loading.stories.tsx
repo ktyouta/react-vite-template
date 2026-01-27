@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Loading } from './loading';
 
 const meta: Meta<typeof Loading> = {
-    title: 'Components/Loading',
+    title: 'components/pages/loading',
     component: Loading,
     tags: ['autodocs'],
     parameters: {

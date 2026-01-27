@@ -8,4 +8,15 @@ export { Select } from './ui/select/select';
 export { Spinner } from './ui/spinner/spinner';
 export { Textarea } from './ui/textarea/textarea';
 export { Textbox } from './ui/textbox/textbox';
+export {
+  Table,
+  TableElement,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './ui/table/table';
 

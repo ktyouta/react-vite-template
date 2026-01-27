@@ -3,7 +3,7 @@ import { useBody } from '../../hooks/use-body'
 import { Body } from './body'
 
 const meta: Meta<typeof Body> = {
-    title: 'Home/Body',
+    title: 'features/home/body',
     component: Body,
 }
 

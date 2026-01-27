@@ -2,15 +2,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button, type PropsType } from "./button";
 
 const meta: Meta<PropsType> = {
-    title: "Components/button",
+    title: "components/ui/button",
     component: Button,
     tags: ["autodocs"],
     argTypes: {
-        color: {
+        colorType: {
             control: "select",
             options: ["red", "blue", "green"],
         },
-        size: {
+        sizeType: {
             control: "select",
             options: ["small", "medium", "large"],
         },
@@ -66,6 +66,6 @@ export const Custom: Story = {
         colorType: "green",
         sizeType: "small",
         children: "ボタン(カスタム)",
-        sx: { padding: "15px 30px" }
+        className: "py-[15px] px-[30px]"
     },
 };

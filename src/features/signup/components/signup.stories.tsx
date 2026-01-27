@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Signup } from './signup';
 
 const meta: Meta<typeof Signup> = {
-    title: 'Features/Signup',
+    title: 'features/signup',
     component: Signup,
     parameters: {
         layout: 'fullscreen',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Textbox } from "./textbox";
 
 const meta: Meta<typeof Textbox> = {
-    title: "Components/Textbox",
+    title: "components/ui/textbox",
     component: Textbox,
     args: {
         registration: {},

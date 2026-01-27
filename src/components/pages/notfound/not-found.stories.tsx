@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { NotFound } from './not-found';
 
 const meta: Meta<typeof NotFound> = {
-    title: 'Pages/NotFound',
+    title: 'components/pages/notfound',
     component: NotFound,
     decorators: [
         (Story) => (
