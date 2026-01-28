@@ -1,34 +1,28 @@
 import { api } from '@/lib/api-client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
-type MethodType = "GET" | "POST";
 
-type PropsType<TData, RData, PData> = {
+type PropsType<T> = {
+    key: readonly unknown[],
     url: string,
-    callback?: (data: TData) => RData,
-    afSuccessFn?: (data: RData) => void,
-    afErrorFn?: (error: unknown) => void,
-    method?: MethodType,
-    postData?: PData,
+    select: (res: unknown) => T,
+    onSuccess?: (data: T) => void,
+    onError?: (error: unknown) => void,
+    enabled?: boolean,
+    options?: Omit<
+        UseQueryOptions<unknown, Error, T, readonly unknown[]>,
+        'queryKey' | 'queryFn' | 'select' | 'enabled'
+    >,
 }
 
-const useQueryWrapper = <
-    TData = unknown,
-    RData = TData,
-    PData extends {} = {},
->(props: PropsType<TData, RData, PData>) => {
+const useQueryWrapper = <T>(props: PropsType<T>) => {
 
-    const afSuccessFnRef = useRef(props.afSuccessFn);
-    const afErrorFnRef = useRef(props.afErrorFn);
-    const callbackRef = useRef(props.callback);
+    const onSuccessRef = useRef(props.onSuccess);
+    const onErrorRef = useRef(props.onError);
 
-    afSuccessFnRef.current = props.afSuccessFn;
-    afErrorFnRef.current = props.afErrorFn;
-    callbackRef.current = props.callback;
-
-    // 成功時のコールバック実行済みフラグ
-    const hasCalledSuccessRef = useRef(false);
+    onSuccessRef.current = props.onSuccess;
+    onErrorRef.current = props.onError;
 
     //GET
     const getQuery = async () => {
@@ -36,41 +30,25 @@ const useQueryWrapper = <
         return data;
     }
 
-    //POST
-    const postQuery = async () => {
-        const { data } = await api.post(props.url, props.postData ?? {});
-        return data;
-    }
-
-    //HTTPメソッドのリスト
-    const queryList = {
-        GET: getQuery,
-        POST: postQuery,
-    }
-
-    const query = useQuery<TData>({
-        queryKey: [props.url],
-        queryFn: props.method ? queryList[props.method] : queryList["GET"],
-        enabled: !!props.url,
+    const query = useQuery({
+        queryKey: props.key,
+        queryFn: getQuery,
+        select: props.select,
+        enabled: props.enabled ?? true,
+        ...props.options,
     });
 
     // 成功時のコールバック処理
     useEffect(() => {
-        if (query.isSuccess && query.data !== undefined && !hasCalledSuccessRef.current) {
-            hasCalledSuccessRef.current = true;
-            const transformedData = callbackRef.current ? callbackRef.current(query.data) : query.data as unknown as RData;
-            afSuccessFnRef.current?.(transformedData);
+        if (query.isSuccess && query.data !== undefined) {
+            onSuccessRef.current?.(query.data);
         }
-
-        if (!query.isSuccess) {
-            hasCalledSuccessRef.current = false;
-        }
-    }, [query.isSuccess, query.data]);
+    }, [query.isSuccess, query.dataUpdatedAt]);
 
     // エラー時のコールバック処理
     useEffect(() => {
         if (query.isError && query.error) {
-            afErrorFnRef.current?.(query.error);
+            onErrorRef.current?.(query.error);
         }
     }, [query.isError, query.error]);
 
