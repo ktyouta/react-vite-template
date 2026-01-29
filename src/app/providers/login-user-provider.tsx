@@ -29,7 +29,7 @@ export function LoginUserProvider(props: PropsType) {
 
     // 認証チェック
     useQueryWrapper({
-        url: apiPaths.auth,
+        url: apiPaths.verify,
         key: authKeys,
         select: (res) => {
             const result = AuthResponseSchema.safeParse(res);

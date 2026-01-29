@@ -1,6 +1,6 @@
 export const apiPaths = {
     refresh: '/api/v1/refresh',
-    auth: '/api/v1/auth',
+    verify: '/api/v1/verify',
     login: '/api/v1/login',
     signup: '/api/v1/signup',
     updateUser: '/api/v1/update-user',
