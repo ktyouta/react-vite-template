@@ -2,7 +2,7 @@ import { MESSAGES } from "@/constants/messages";
 import { createApiResponseSchema } from "@/lib/api-response";
 import { LoginUserSchema, LoginUserType } from "@/types/login-user-type";
 import { createCtx } from "@/utils/create-ctx";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { veryfy } from "../api/veryfy";
 
 const VeryfiyResponseSchema = createApiResponseSchema(LoginUserSchema);
@@ -22,35 +22,35 @@ export function LoginUserProvider(props: PropsType) {
 
     // ログインユーザー情報
     const [loginUser, setLoginUser] = useState<LoginUserType | null>(null);
-    // 認証チェック中フラグ
-    const [isAuthLoading, setIsAuthLoading] = useState(true);
 
     // 認証チェック
-    veryfy({
+    const { data, isSuccess } = veryfy({
         select: (res: unknown) => {
+
+            if (!res) {
+                return null;
+            }
+
             const result = VeryfiyResponseSchema.safeParse(res);
             if (!result.success) {
                 console.error(MESSAGES.API_VALIDATION_ERROR, result.error);
                 throw new Error(MESSAGES.GENERIC_ERROR);
             }
             return result.data.data;
-        },
-        onSuccess: (data: LoginUserType) => {
-            setLoginUser(data);
-            setIsAuthLoading(false);
-        },
-        onError: () => {
-            setIsAuthLoading(false);
-        },
+        }
     });
 
+    useEffect(() => {
+        if (data && isSuccess) {
+            setLoginUser(data);
+        }
+    }, [data, isSuccess]);
+
     return (
-        <IsAuthLoadingContext.Provider value={isAuthLoading}>
-            <LoginUserContext.Provider value={loginUser}>
-                <SetLoginUserContext.Provider value={setLoginUser}>
-                    {props.children}
-                </SetLoginUserContext.Provider>
-            </LoginUserContext.Provider>
-        </IsAuthLoadingContext.Provider>
+        <LoginUserContext.Provider value={loginUser}>
+            <SetLoginUserContext.Provider value={setLoginUser}>
+                {props.children}
+            </SetLoginUserContext.Provider>
+        </LoginUserContext.Provider>
     );
 }

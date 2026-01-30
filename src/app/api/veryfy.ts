@@ -1,22 +1,25 @@
 import { apiPaths } from "@/config/api-paths";
-import { useQueryWrapper } from "@/hooks/use-query-wrapper";
+import { api } from "@/lib/api-client";
 import { LoginUserType } from "@/types/login-user-type";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { veryfyKeys } from "./query-key";
 
 type PropsType = {
-    select: (res: unknown) => LoginUserType,
-    onSuccess?: (data: LoginUserType) => void,
-    onError?: (error: unknown) => void,
+    select: (res: unknown) => LoginUserType | null,
 }
 
 export function veryfy(props: PropsType) {
 
-    // 認証チェック
-    return useQueryWrapper({
-        url: apiPaths.verify,
-        key: veryfyKeys.all,
+    return useSuspenseQuery({
+        queryKey: veryfyKeys.all,
+        queryFn: async () => {
+            try {
+                const { data } = await api.get(apiPaths.verify);
+                return data;
+            } catch (error) {
+                return null;
+            }
+        },
         select: props.select,
-        onSuccess: props.onSuccess,
-        onError: props.onError,
     });
 }

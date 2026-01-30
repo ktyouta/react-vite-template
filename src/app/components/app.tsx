@@ -1,6 +1,7 @@
-import { Errors } from '@/components';
+import { Errors, Loading } from '@/components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -24,21 +25,25 @@ function App() {
       <ErrorBoundary
         FallbackComponent={Errors}
       >
-        <QueryClientProvider
-          client={queryClient}
+        <Suspense
+          fallback={<Loading />}
         >
-          <ToastContainer
-            position="top-center"
-            autoClose={3000}
-          />
-          <LoginUserProvider>
-            <AppRouter />
-          </LoginUserProvider>
-          {/* React-query devtool */}
-          <ReactQueryDevtools
-            initialIsOpen={false}
-          />
-        </QueryClientProvider>
+          <QueryClientProvider
+            client={queryClient}
+          >
+            <ToastContainer
+              position="top-center"
+              autoClose={3000}
+            />
+            <LoginUserProvider>
+              <AppRouter />
+            </LoginUserProvider>
+            {/* React-query devtool */}
+            <ReactQueryDevtools
+              initialIsOpen={false}
+            />
+          </QueryClientProvider>
+        </Suspense>
       </ErrorBoundary>
     </BrowserRouter>
   )

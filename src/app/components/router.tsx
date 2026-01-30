@@ -1,33 +1,45 @@
 import { NotFound } from '@/components/pages/notfound/not-found';
 import { paths } from '@/config/paths';
-import { HomeContainer } from '@/features/home/components/home/home-container';
-import { LoginContainer } from '@/features/login/components/login-container';
-import { MyPage } from '@/features/mypage/components/mypage/mypage';
-import { SampleContainer } from '@/features/sample/components/sample/sample-container';
-import { SignupContainer } from '@/features/signup/components/signup-container';
-import { UpdatePasswordContainer } from '@/features/updatepassword/components/update-password-container';
-import { UpdateUserContainer } from '@/features/updateuser/components/update-user-container';
-import { ReactNode } from 'react';
+import { lazy, ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { AuthLoadingRoute } from './auth-loading-route';
 import { GuestRoute } from './guest-route';
+import { PageSuspense } from './page-suspense';
 import { ProtectedRoute } from './protected-route';
+
+// lazy import（コード分割）
+const HomeContainer = lazy(() => import('@/features/home/components/home/home-container').then(m => ({ default: m.HomeContainer })));
+const SampleContainer = lazy(() => import('@/features/sample/components/sample/sample-container').then(m => ({ default: m.SampleContainer })));
+const MyPage = lazy(() => import('@/features/mypage/components/mypage/mypage').then(m => ({ default: m.MyPage })));
+const LoginContainer = lazy(() => import('@/features/login/components/login-container').then(m => ({ default: m.LoginContainer })));
+const SignupContainer = lazy(() => import('@/features/signup/components/signup-container').then(m => ({ default: m.SignupContainer })));
+const UpdateUserContainer = lazy(() => import('@/features/updateuser/components/update-user-container').then(m => ({ default: m.UpdateUserContainer })));
+const UpdatePasswordContainer = lazy(() => import('@/features/updatepassword/components/update-password-container').then(m => ({ default: m.UpdatePasswordContainer })));
 
 
 const routerList: { path: string, element: ReactNode }[] = [
     {
         path: paths.home.path,
-        element: <HomeContainer />
+        element: (
+            <PageSuspense>
+                <HomeContainer />
+            </PageSuspense>
+        )
     },
     {
         path: paths.sample.path,
-        element: <SampleContainer />
+        element: (
+            <PageSuspense>
+                <SampleContainer />
+            </PageSuspense>
+        )
     },
     {
         path: paths.mypage.path,
         element: (
             <ProtectedRoute>
-                <MyPage />
+                <PageSuspense>
+                    <MyPage />
+                </PageSuspense>
             </ProtectedRoute>
         )
     },
@@ -35,7 +47,9 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.login.path,
         element: (
             <GuestRoute>
-                <LoginContainer />
+                <PageSuspense>
+                    <LoginContainer />
+                </PageSuspense>
             </GuestRoute>
         )
     },
@@ -43,7 +57,9 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.siginup.path,
         element: (
             <GuestRoute>
-                <SignupContainer />
+                <PageSuspense>
+                    <SignupContainer />
+                </PageSuspense>
             </GuestRoute>
         )
     },
@@ -51,7 +67,9 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.updateUser.path,
         element: (
             <ProtectedRoute>
-                <UpdateUserContainer />
+                <PageSuspense>
+                    <UpdateUserContainer />
+                </PageSuspense>
             </ProtectedRoute>
         )
     },
@@ -59,7 +77,9 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.updatePassword.path,
         element: (
             <ProtectedRoute>
-                <UpdatePasswordContainer />
+                <PageSuspense>
+                    <UpdatePasswordContainer />
+                </PageSuspense>
             </ProtectedRoute>
         )
     },
@@ -70,17 +90,6 @@ const routerList: { path: string, element: ReactNode }[] = [
 ];
 
 export const AppRouter = () => {
-
-    const router = useRoutes(routerList.map((e) => {
-        return {
-            ...e,
-            element: (
-                <AuthLoadingRoute>
-                    {e.element}
-                </AuthLoadingRoute>
-            )
-        }
-    }));
-
+    const router = useRoutes(routerList);
     return router;
 };
