@@ -1,2 +1,4 @@
 // 認証チェック用のキー
-export const authKeys = ['auth'] as const;
+export const veryfyKeys = {
+    all: ['veryfy'] as const,
+};

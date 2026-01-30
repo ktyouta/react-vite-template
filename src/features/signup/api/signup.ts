@@ -1,6 +1,6 @@
 import { apiPaths } from '@/config/api-paths';
 import { MESSAGES } from '@/constants/messages';
-import useMutationWrapper from '@/hooks/use-mutation-wrapper';
+import { useMutationWrapper } from '@/hooks/use-mutation-wrapper';
 import { ApiErrorResponseSchema, createApiResponseSchema } from '@/lib/api-response';
 import { LoginUserSchema, LoginUserType } from '@/types/login-user-type';
 
@@ -16,7 +16,7 @@ export function useSignupMutation(props: PropsType) {
     return useMutationWrapper({
         url: apiPaths.signup,
         method: "POST",
-        afSuccessFn: (res: unknown) => {
+        onSuccess: (res: unknown) => {
             const result = SignupResponseSchema.safeParse(res);
             if (!result.success) {
                 console.error(MESSAGES.API_VALIDATION_ERROR, result.error);
@@ -25,7 +25,7 @@ export function useSignupMutation(props: PropsType) {
             }
             props.onSuccess(result.data.data);
         },
-        afErrorFn: (res: unknown) => {
+        onError: (res: unknown) => {
             const result = ApiErrorResponseSchema.safeParse(res);
             if (!result.success) {
                 console.error(MESSAGES.API_VALIDATION_ERROR, result.error);

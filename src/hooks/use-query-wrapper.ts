@@ -1,22 +1,22 @@
 import { api } from '@/lib/api-client';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { QueryKey, useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
 
 type PropsType<T> = {
-    key: readonly unknown[],
+    key: QueryKey,
     url: string,
     select: (res: unknown) => T,
     onSuccess?: (data: T) => void,
     onError?: (error: unknown) => void,
     enabled?: boolean,
     options?: Omit<
-        UseQueryOptions<unknown, Error, T, readonly unknown[]>,
+        UseQueryOptions<unknown, Error, T, QueryKey>,
         'queryKey' | 'queryFn' | 'select' | 'enabled'
     >,
 }
 
-const useQueryWrapper = <T>(props: PropsType<T>) => {
+export const useQueryWrapper = <T>(props: PropsType<T>) => {
 
     const onSuccessRef = useRef(props.onSuccess);
     const onErrorRef = useRef(props.onError);
@@ -54,5 +54,3 @@ const useQueryWrapper = <T>(props: PropsType<T>) => {
 
     return query;
 };
-
-export default useQueryWrapper;

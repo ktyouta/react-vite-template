@@ -1,5 +1,5 @@
 import { api } from '@/lib/api-client';
-import { useMutation, useQueryClient, type QueryKey } from '@tanstack/react-query';
+import { useMutation, type QueryKey } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { useMemo } from 'react';
 
@@ -9,21 +9,19 @@ type PropsType = {
     method: methodType,
     queryKey?: QueryKey,
     //処理待ち中の処理
-    waitingFn?: () => void,
+    onMutate?: () => void,
     //処理成功後の処理（バリデーションは呼び出し側で実施）
-    afSuccessFn?: (res: unknown) => void,
+    onSuccess?: (res: unknown) => void,
     //失敗後の処理（バリデーションは呼び出し側で実施）
-    afErrorFn?: (res: unknown) => void,
-    finallyFn?: () => void,
+    onError?: (res: unknown) => void,
+    onSettled?: (res: unknown) => void,
 }
 
 //HTTPメソッド
 type methodType = "POST" | "PUT" | "DELETE";
 
 
-const useMutationWrapper = <T,>(props: PropsType) => {
-
-    const queryClient = useQueryClient();
+export const useMutationWrapper = <T,>(props: PropsType) => {
 
     //POST
     const postQuery = async (postData: T) => {
@@ -60,21 +58,15 @@ const useMutationWrapper = <T,>(props: PropsType) => {
     return useMutation({
         //HTTPリクエスト送信処理
         mutationFn: queryMethod ? (data: T) => queryMethod(data) : undefined,
-        onMutate: props.waitingFn ?? undefined,
-        onSuccess: props.afSuccessFn ?? undefined,
+        onMutate: props.onMutate ?? undefined,
+        onSuccess: props.onSuccess ?? undefined,
         onError: (error: Error) => {
             // AxiosエラーからAPIレスポンスを抽出して渡す
-            if (props.afErrorFn) {
+            if (props.onError) {
                 const axiosError = error as AxiosError;
-                props.afErrorFn(axiosError.response?.data);
+                props.onError(axiosError.response?.data);
             }
         },
-        onSettled: props.queryKey ? () => {
-            if (props.queryKey) {
-                queryClient.invalidateQueries({ queryKey: props.queryKey });
-            }
-        } : undefined,
+        onSettled: props.onSettled ?? undefined,
     });
-}
-
-export default useMutationWrapper;
+};

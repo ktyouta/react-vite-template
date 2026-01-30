@@ -1,13 +1,11 @@
-import { apiPaths } from "@/config/api-paths";
 import { MESSAGES } from "@/constants/messages";
-import useQueryWrapper from "@/hooks/use-query-wrapper";
 import { createApiResponseSchema } from "@/lib/api-response";
 import { LoginUserSchema, LoginUserType } from "@/types/login-user-type";
 import { createCtx } from "@/utils/create-ctx";
 import { ReactNode, useState } from "react";
-import { authKeys } from "../api/query-key";
+import { veryfy } from "../api/veryfy";
 
-const AuthResponseSchema = createApiResponseSchema(LoginUserSchema);
+const VeryfiyResponseSchema = createApiResponseSchema(LoginUserSchema);
 
 // ログインユーザー情報
 export const LoginUserContext = createCtx<LoginUserType | null>();
@@ -28,18 +26,16 @@ export function LoginUserProvider(props: PropsType) {
     const [isAuthLoading, setIsAuthLoading] = useState(true);
 
     // 認証チェック
-    useQueryWrapper({
-        url: apiPaths.verify,
-        key: authKeys,
-        select: (res) => {
-            const result = AuthResponseSchema.safeParse(res);
+    veryfy({
+        select: (res: unknown) => {
+            const result = VeryfiyResponseSchema.safeParse(res);
             if (!result.success) {
                 console.error(MESSAGES.API_VALIDATION_ERROR, result.error);
                 throw new Error(MESSAGES.GENERIC_ERROR);
             }
             return result.data.data;
         },
-        onSuccess: (data) => {
+        onSuccess: (data: LoginUserType) => {
             setLoginUser(data);
             setIsAuthLoading(false);
         },
