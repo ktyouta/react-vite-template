@@ -1,4 +1,6 @@
 import { LoginUserContext, SetLoginUserContext } from '@/app/providers/login-user-provider';
+import { paths } from '@/config/paths';
+import { useAppNavigation } from '@/hooks/use-app-navigation';
 import { LoginUserType } from '@/types/login-user-type';
 import { useState } from 'react';
 import { useLoginMutation } from '../api/login';
@@ -16,6 +18,8 @@ export function useLogin() {
     const { register, handleSubmit, formState: { errors }, reset } = useLoginForm();
     // ログインユーザー情報
     const loginUser = LoginUserContext.useCtx();
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
 
     /**
      * ログインリクエスト
@@ -52,6 +56,12 @@ export function useLogin() {
         postMutation.mutate(body);
     });
 
+    /**
+     * 前画面に戻る
+     */
+    function back() {
+        appGoBack(paths.home.path);
+    }
 
     return {
         errMessage,
@@ -60,5 +70,6 @@ export function useLogin() {
         errors,
         clickLogin,
         loginUser,
+        back,
     }
 }

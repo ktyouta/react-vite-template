@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-function useSwitch() {
+export function useSwitch() {
 
     //フラグ
     const [flag, setFlag] = useState(false);
@@ -17,5 +17,3 @@ function useSwitch() {
 
     return { flag, on, off }
 }
-
-export default useSwitch;

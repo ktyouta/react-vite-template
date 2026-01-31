@@ -1,5 +1,6 @@
 import { SetLoginUserContext } from '@/app/providers/login-user-provider';
 import { paths } from '@/config/paths';
+import { useAppNavigation } from '@/hooks/use-app-navigation';
 import { LoginUserType } from '@/types/login-user-type';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,8 @@ export function useUpdatePassword() {
     const setLoginUserInfo = SetLoginUserContext.useCtx();
     // フォーム
     const { register, handleSubmit, formState: { errors }, reset } = useUpdatePasswordForm();
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
     // 登録リクエスト
     const postMutation = useUpdatePasswordMutation({
         // 正常終了後の処理
@@ -55,13 +58,13 @@ export function useUpdatePassword() {
     /**
      * 戻るボタン押下
      */
-    function clickBack() {
-        navigate(paths.login.path);
+    function back() {
+        appGoBack(paths.home.path);
     }
 
     return {
         errMessage,
-        clickBack,
+        back,
         isLoading: postMutation.isPending,
         register,
         errors,

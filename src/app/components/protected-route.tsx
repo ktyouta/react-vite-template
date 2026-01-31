@@ -1,6 +1,6 @@
 import { paths } from "@/config/paths";
 import React, { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { LoginUserContext } from "../providers/login-user-provider";
 
 type PropsType = {
@@ -11,11 +11,13 @@ export function ProtectedRoute(props: PropsType) {
 
     // ログインユーザー情報
     const loginUser = LoginUserContext.useCtx();
+    // パス取得用
+    const location = useLocation();
 
     if (!loginUser) {
         return (
             <Navigate
-                to={paths.login.path}
+                to={paths.login.getHref(location.pathname)}
                 replace
             />
         );

@@ -1,5 +1,6 @@
 import { SetLoginUserContext } from '@/app/providers/login-user-provider';
 import { paths } from '@/config/paths';
+import { useAppNavigation } from '@/hooks/use-app-navigation';
 import { useCreateYearList } from '@/hooks/use-create-year-list';
 import { LoginUserType } from '@/types/login-user-type';
 import { useState } from 'react';
@@ -21,6 +22,8 @@ export function useUpdateUser() {
     const yearCoomboList = useCreateYearList();
     // フォーム
     const { register, handleSubmit, formState: { errors }, reset, watch } = useUpdateUserForm();
+    // ルーティング用
+    const { appGoBack } = useAppNavigation();
     // 登録リクエスト
     const postMutation = useUpdateUserMutation({
         // 正常終了後の処理
@@ -57,14 +60,14 @@ export function useUpdateUser() {
     /**
      * 戻るボタン押下
      */
-    function clickBack() {
-        navigate(paths.login.path);
+    function back() {
+        appGoBack(paths.home.path);
     }
 
     return {
         errMessage,
         yearCoomboList,
-        clickBack,
+        back,
         isLoading: postMutation.isPending,
         register,
         errors,

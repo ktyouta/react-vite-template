@@ -1,45 +1,38 @@
-import { NotFound } from '@/components/pages/notfound/not-found';
 import { paths } from '@/config/paths';
+import { LoginContainer } from '@/features/login/components/login-container';
+import { SignupContainer } from '@/features/signup/components/signup-container';
+import { UpdatePasswordContainer } from '@/features/updatepassword/components/update-password-container';
+import { UpdateUserContainer } from '@/features/updateuser/components/update-user-container';
 import { lazy, ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { GuestRoute } from './guest-route';
-import { PageSuspense } from './page-suspense';
 import { ProtectedRoute } from './protected-route';
 
 // lazy import（コード分割）
 const HomeContainer = lazy(() => import('@/features/home/components/home/home-container').then(m => ({ default: m.HomeContainer })));
 const SampleContainer = lazy(() => import('@/features/sample/components/sample/sample-container').then(m => ({ default: m.SampleContainer })));
 const MyPage = lazy(() => import('@/features/mypage/components/mypage/mypage').then(m => ({ default: m.MyPage })));
-const LoginContainer = lazy(() => import('@/features/login/components/login-container').then(m => ({ default: m.LoginContainer })));
-const SignupContainer = lazy(() => import('@/features/signup/components/signup-container').then(m => ({ default: m.SignupContainer })));
-const UpdateUserContainer = lazy(() => import('@/features/updateuser/components/update-user-container').then(m => ({ default: m.UpdateUserContainer })));
-const UpdatePasswordContainer = lazy(() => import('@/features/updatepassword/components/update-password-container').then(m => ({ default: m.UpdatePasswordContainer })));
+const NotFound = lazy(() => import('@/components/pages/notfound/not-found').then(m => ({ default: m.NotFound })));
 
 
 const routerList: { path: string, element: ReactNode }[] = [
     {
         path: paths.home.path,
         element: (
-            <PageSuspense>
-                <HomeContainer />
-            </PageSuspense>
+            <HomeContainer />
         )
     },
     {
         path: paths.sample.path,
         element: (
-            <PageSuspense>
-                <SampleContainer />
-            </PageSuspense>
+            <SampleContainer />
         )
     },
     {
         path: paths.mypage.path,
         element: (
             <ProtectedRoute>
-                <PageSuspense>
-                    <MyPage />
-                </PageSuspense>
+                <MyPage />
             </ProtectedRoute>
         )
     },
@@ -47,9 +40,7 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.login.path,
         element: (
             <GuestRoute>
-                <PageSuspense>
-                    <LoginContainer />
-                </PageSuspense>
+                <LoginContainer />
             </GuestRoute>
         )
     },
@@ -57,9 +48,7 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.siginup.path,
         element: (
             <GuestRoute>
-                <PageSuspense>
-                    <SignupContainer />
-                </PageSuspense>
+                <SignupContainer />
             </GuestRoute>
         )
     },
@@ -67,9 +56,7 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.updateUser.path,
         element: (
             <ProtectedRoute>
-                <PageSuspense>
-                    <UpdateUserContainer />
-                </PageSuspense>
+                <UpdateUserContainer />
             </ProtectedRoute>
         )
     },
@@ -77,9 +64,7 @@ const routerList: { path: string, element: ReactNode }[] = [
         path: paths.updatePassword.path,
         element: (
             <ProtectedRoute>
-                <PageSuspense>
-                    <UpdatePasswordContainer />
-                </PageSuspense>
+                <UpdatePasswordContainer />
             </ProtectedRoute>
         )
     },

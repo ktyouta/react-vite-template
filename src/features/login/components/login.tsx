@@ -12,7 +12,8 @@ type PropsType = {
         userName: string;
         password: string;
     }>,
-    clickLogin: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+    clickLogin: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>,
+    back(): void,
 }
 
 export function Login(props: PropsType) {
@@ -23,6 +24,7 @@ export function Login(props: PropsType) {
         register,
         errors,
         clickLogin,
+        back,
     } = props;
 
     return (
@@ -72,7 +74,7 @@ export function Login(props: PropsType) {
                         <button
                             type="button"
                             className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                            onClick={() => { }}
+                            onClick={back}
                         >
                             戻る
                         </button>

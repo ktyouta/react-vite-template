@@ -41,7 +41,7 @@ export function LoginUserProvider(props: PropsType) {
     });
 
     useEffect(() => {
-        if (data && isSuccess) {
+        if (data && isSuccess && !loginUser) {
             setLoginUser(data);
         }
     }, [data, isSuccess]);

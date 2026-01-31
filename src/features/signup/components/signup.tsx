@@ -10,7 +10,7 @@ type PropsType = {
         label: string;
         value: string;
     }[],
-    clickBack: () => void,
+    back: () => void,
     isLoading: boolean,
     register: UseFormRegister<{
         userName: string;
@@ -42,7 +42,7 @@ type PropsType = {
         password: string;
         confirmPassword: string;
     }>,
-    handleConfirm: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>
+    handleConfirm: (e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>,
 }
 
 export function Signup(props: PropsType) {
@@ -50,7 +50,7 @@ export function Signup(props: PropsType) {
     const {
         errMessage,
         yearCoomboList,
-        clickBack,
+        back,
         isLoading,
         register,
         errors,
@@ -145,7 +145,7 @@ export function Signup(props: PropsType) {
                     <button
                         type="button"
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                        onClick={clickBack}
+                        onClick={back}
                     >
                         戻る
                     </button>

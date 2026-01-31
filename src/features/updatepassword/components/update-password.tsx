@@ -4,7 +4,7 @@ import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 type PropsType = {
     errMessage: string,
-    clickBack: () => void,
+    back: () => void,
     isLoading: boolean,
     register: UseFormRegister<{
         password: string;
@@ -21,7 +21,7 @@ export function UpdatePassword(props: PropsType) {
 
     const {
         errMessage,
-        clickBack,
+        back,
         isLoading,
         register,
         errors,
@@ -75,7 +75,7 @@ export function UpdatePassword(props: PropsType) {
                     <button
                         type="button"
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                        onClick={clickBack}
+                        onClick={back}
                     >
                         戻る
                     </button>

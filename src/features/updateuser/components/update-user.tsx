@@ -10,7 +10,7 @@ type PropsType = {
         label: string;
         value: string;
     }[],
-    clickBack: () => void,
+    back: () => void,
     isLoading: boolean,
     register: UseFormRegister<{
         userName: string;
@@ -44,7 +44,7 @@ export function UpdateUser(props: PropsType) {
     const {
         errMessage,
         yearCoomboList,
-        clickBack,
+        back,
         isLoading,
         register,
         errors,
@@ -113,7 +113,7 @@ export function UpdateUser(props: PropsType) {
                     <button
                         type="button"
                         className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                        onClick={clickBack}
+                        onClick={back}
                     >
                         戻る
                     </button>

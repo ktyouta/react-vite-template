@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { LoginUserProvider } from '../providers/login-user-provider';
 import { AppRouter } from './router';
 
-function App() {
+export function App() {
 
   //React-Query用
   const queryClient = new QueryClient({
@@ -48,5 +48,3 @@ function App() {
     </BrowserRouter>
   )
 }
-
-export default App;

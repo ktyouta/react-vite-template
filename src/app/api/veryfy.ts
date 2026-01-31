@@ -8,6 +8,11 @@ type PropsType = {
     select: (res: unknown) => LoginUserType | null,
 }
 
+/**
+ * 認証チェック
+ * @param props 
+ * @returns 
+ */
 export function veryfy(props: PropsType) {
 
     return useSuspenseQuery({

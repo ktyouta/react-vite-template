@@ -9,7 +9,7 @@ const meta: Meta<typeof UpdatePassword> = {
     },
     args: {
         errMessage: '',
-        clickBack: () => {
+        back: () => {
             alert("戻るボタンが押されました");
         },
         isLoading: false,

@@ -68,14 +68,14 @@ export function useSignup() {
     /**
      * 戻るボタン押下
      */
-    function clickBack() {
+    function back() {
         navigate(paths.login.path);
     }
 
     return {
         errMessage,
         yearCoomboList,
-        clickBack,
+        back,
         isLoading: postMutation.isPending,
         register,
         errors,
