@@ -59,103 +59,112 @@ export function Signup(props: PropsType) {
     } = { ...props };
 
     return (
-        <div className="w-full bg-[#dcdcdc] min-h-screen box-border pb-[3%] pt-[5%] md:pl-[10%]">
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-8">
             {isLoading && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10">
                     <Spinner size={40} />
                 </div>
             )}
-            <div className="box-border w-[382px] mx-auto md:ml-0 md:mr-0 md:w-[550px]">
-                <div className="text-[30px] mb-[8%]">
+            <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8 sm:p-10">
+                <h1 className="text-2xl font-bold text-gray-800 text-center mb-8">
                     アカウント作成
-                </div>
-                {
-                    errMessage &&
-                    <p className="text-red-500 text-sm mb-2 text-center font-bold">
+                </h1>
+                {errMessage && (
+                    <div className="bg-red-50 border border-red-200 text-red-600 text-sm rounded-lg p-4 mb-6">
                         {errMessage}
-                    </p>
-                }
-                <div className="mb-[8%]">
-                    <div>ユーザー名(3～30文字)</div>
-                    <Textbox
-                        className="w-[98%] h-[33px] px-2 border"
-                        type="text"
-                        maxLength={30}
-                        placeholder="UserName"
-                        autoComplete="off"
-                        registration={register("userName")}
-                    />
-                    {errors.userName?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.userName.message}</p>
-                    )}
-                </div>
-                <div className="mb-[8%]">
-                    <div>生年月日</div>
-                    <div className="flex items-center justify-center gap-1">
-                        <Select
-                            options={yearCoomboList}
-                            className="w-[68%] h-[39px]"
-                            registration={register("birthday.year")}
-                        />
-                        <div className="mr-[2px] shrink-0">年</div>
-                        <Select
-                            options={MONTH_LIST}
-                            className="w-[68%] h-[39px]"
-                            registration={register("birthday.month")}
-                        />
-                        <div className="mr-[2px] shrink-0">月</div>
-                        <Select
-                            options={getDayList(watch('birthday.year'), watch('birthday.month'))}
-                            className="w-[68%] h-[39px]"
-                            registration={register("birthday.day")}
-                        />
-                        <span className="shrink-0">日</span>
                     </div>
-                    {errors.birthday?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.birthday.message}</p>
-                    )}
-                </div>
-                <div className="mb-[8%]">
-                    <div>パスワード</div>
-                    <Textbox
-                        className="w-[98%] h-[33px] px-2 border"
-                        type="password"
-                        maxLength={30}
-                        autoComplete="off"
-                        registration={register("password")}
-                    />
-                    {errors.password?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
-                    )}
-                </div>
-                <div className="mb-[8%]">
-                    <div>確認用パスワード</div>
-                    <Textbox
-                        className="w-[98%] h-[33px] px-2 border"
-                        type="password"
-                        maxLength={30}
-                        autoComplete="off"
-                        registration={register("confirmPassword")}
-                    />
-                    {errors.confirmPassword?.message && (
-                        <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
-                    )}
-                </div>
-                <div className="flex flex-row gap-2 mt-2">
-                    <button
-                        type="button"
-                        className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                        onClick={back}
-                    >
-                        戻る
-                    </button>
-                    <button
-                        type="button"
-                        className="bg-black hover:bg-gray-800 text-white min-w-[100px] py-2 px-4 rounded-[20px]"
-                        onClick={handleConfirm}
-                    >
-                        登録
-                    </button>
+                )}
+                <div className="flex flex-col gap-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            ユーザー名（3〜30文字）
+                        </label>
+                        <Textbox
+                            className={`w-full h-12 px-4 rounded-lg border-gray-300 ${errors.userName ? 'border-red-500 focus:ring-red-500' : ''}`}
+                            type="text"
+                            maxLength={30}
+                            placeholder="UserName"
+                            autoComplete="off"
+                            registration={register("userName")}
+                        />
+                        {errors.userName?.message && (
+                            <p className="text-red-500 text-xs mt-2">{errors.userName.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            生年月日
+                        </label>
+                        <div className="flex items-center gap-2">
+                            <Select
+                                options={yearCoomboList}
+                                className="flex-1 h-12 px-3 rounded-lg border-gray-300"
+                                registration={register("birthday.year")}
+                            />
+                            <span className="text-gray-600 shrink-0">年</span>
+                            <Select
+                                options={MONTH_LIST}
+                                className="flex-1 h-12 px-3 rounded-lg border-gray-300"
+                                registration={register("birthday.month")}
+                            />
+                            <span className="text-gray-600 shrink-0">月</span>
+                            <Select
+                                options={getDayList(watch('birthday.year'), watch('birthday.month'))}
+                                className="flex-1 h-12 px-3 rounded-lg border-gray-300"
+                                registration={register("birthday.day")}
+                            />
+                            <span className="text-gray-600 shrink-0">日</span>
+                        </div>
+                        {errors.birthday?.message && (
+                            <p className="text-red-500 text-xs mt-2">{errors.birthday.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            パスワード
+                        </label>
+                        <Textbox
+                            className={`w-full h-12 px-4 rounded-lg border-gray-300 ${errors.password ? 'border-red-500 focus:ring-red-500' : ''}`}
+                            type="password"
+                            maxLength={30}
+                            autoComplete="off"
+                            registration={register("password")}
+                        />
+                        {errors.password?.message && (
+                            <p className="text-red-500 text-xs mt-2">{errors.password.message}</p>
+                        )}
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            確認用パスワード
+                        </label>
+                        <Textbox
+                            className={`w-full h-12 px-4 rounded-lg border-gray-300 ${errors.confirmPassword ? 'border-red-500 focus:ring-red-500' : ''}`}
+                            type="password"
+                            maxLength={30}
+                            autoComplete="off"
+                            registration={register("confirmPassword")}
+                        />
+                        {errors.confirmPassword?.message && (
+                            <p className="text-red-500 text-xs mt-2">{errors.confirmPassword.message}</p>
+                        )}
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                        <button
+                            type="button"
+                            className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 px-4 rounded-lg transition-colors"
+                            onClick={back}
+                        >
+                            戻る
+                        </button>
+                        <button
+                            type="button"
+                            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+                            onClick={handleConfirm}
+                        >
+                            登録
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
