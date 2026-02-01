@@ -1,4 +1,4 @@
-import { SetLoginUserContext } from '@/app/providers/login-user-provider';
+import { SetLoginUserContext } from '@/app/components/login-user-provider';
 import { paths } from '@/config/paths';
 import { useCreateYearList } from '@/hooks/use-create-year-list';
 import { LoginUserType } from '@/types/login-user-type';

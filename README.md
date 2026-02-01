@@ -68,7 +68,6 @@ npm run build
 src/
 ├── app/                    # アプリケーションエントリポイント
 │   ├── components/         # App, Router, ProtectedRoute等
-│   └── providers/          # グローバルProvider
 ├── components/             # 共通コンポーネント
 │   ├── ui/                 # UIプリミティブ (Button, Textbox等)
 │   └── pages/              # ページレベルコンポーネント (NotFound, Loading等)

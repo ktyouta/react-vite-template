@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Checkbox } from './checkbox';
 
 const meta: Meta<typeof Checkbox> = {
-    title: 'components/ui/Checkbox',
+    title: 'components/ui/checkbox',
     component: Checkbox,
     tags: ['autodocs'],
     argTypes: {

@@ -1,4 +1,4 @@
-import { LoginUserContext, SetLoginUserContext } from '@/app/providers/login-user-provider';
+import { LoginUserContext, SetLoginUserContext } from '@/app/components/login-user-provider';
 import { paths } from '@/config/paths';
 import { useAppNavigation } from '@/hooks/use-app-navigation';
 import { LoginUserType } from '@/types/login-user-type';

@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { LoginUserProvider } from '../providers/login-user-provider';
+import { LoginUserProvider } from './login-user-provider';
 import { AppRouter } from './router';
 
 export function App() {

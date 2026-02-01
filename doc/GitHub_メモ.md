@@ -42,7 +42,7 @@ git branch -M main
 「origin ＝ この GitHub リポジトリ」の紐づけを行う
 
 ```bash
-git remote add origin https://github.com/ktyouta/[リポジトリ名].git
+git remote add origin https://github.com/[GitHubのユーザー名]/[リポジトリ名].git
 ```
 
 ### 8. 修正をリモートリポジトリに反映
